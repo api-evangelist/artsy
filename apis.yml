@@ -10,8 +10,8 @@ type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
   - Art
-  - Collectors
   - Artists
+  - Collectors
   - Marketplace
 url: >-
   https://raw.githubusercontent.com/api-evangelist/artsy/refs/heads/main/apis.yml
