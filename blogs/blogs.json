@@ -1,0 +1,13 @@
+{
+  "repo": "artsy",
+  "feeds": [
+    {
+      "source": "https://artsy.github.io/",
+      "feed_url": "https://artsy.github.io/feed",
+      "saved": 10,
+      "title": "Artsy Engineering"
+    }
+  ],
+  "post_count": 10,
+  "fetched": "2026-05-03T23:22:42Z"
+}
