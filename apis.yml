@@ -11,7 +11,7 @@ description: >-
   gene (classification) data. Note that the public API may be retired; partner
   integrations are handled through a separate partner API program.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
   - Art
   - Marketplace
