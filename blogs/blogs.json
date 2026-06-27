@@ -2,8 +2,8 @@
   "repo": "artsy",
   "feeds": [
     {
-      "source": "https://artsy.github.io/feed",
-      "feed_url": "https://artsy.github.io/feed",
+      "source": "https://artsy.github.io/feed.xml",
+      "feed_url": "https://artsy.github.io/feed.xml",
       "title": "",
       "saved": 0,
       "method": "feed"
@@ -17,5 +17,5 @@
     }
   ],
   "post_count": 14,
-  "fetched": "2026-06-14T20:42:17Z"
+  "fetched": "2026-06-27T12:03:07Z"
 }

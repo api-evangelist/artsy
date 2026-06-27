@@ -62,7 +62,7 @@ common:
   - type: GitHubOrganization
     url: https://github.com/artsy
     title: Artsy GitHub Organization
-  - type: SignUp
+  - type: Signup
     url: https://www.artsy.net/signup
     title: Sign Up
   - type: Login
