@@ -48,6 +48,8 @@ apis:
       - type: Authentication
         url: https://developers.artsy.net/v2/docs/authentication
 common:
+  - type: DomainSecurity
+    url: security/artsy-domain-security.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/artsyinc
   - type: Portal
