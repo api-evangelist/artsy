@@ -1,0 +1,624 @@
+generated: '2026-09-07'
+method: derived
+status: candidate
+source: openapi/artsy-public-api-openapi.yml
+note: 'NO Artsy MCP server exists. A search of the artsy GitHub organization for any repository matching
+  "mcp" returned zero results, the npm @artsy scope publishes no MCP package, and no hosted MCP endpoint
+  is referenced anywhere in developers.artsy.net or https://www.artsy.net/llms.txt. The tools below are
+  DERIVED candidates: one per operationId in the harvested Swagger 2.0 contract, so each carries a real
+  inputSchema source rather than a guessed one. No endpoint URL is invented.'
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: unknown
+  verified: derived
+  note: 'mode: none — nobody ships a server. If Artsy ever publishes one, note that the Public API it
+    would wrap is announced for retirement (see lifecycle/artsy-lifecycle.yml), so the durable agent surface
+    is more likely to be built on Metaphysics (GraphQL) than on this REST contract.'
+server:
+  name: artsy
+  transport: null
+  url: null
+auth_for_tools:
+  scheme: X-Xapp-Token header
+  obtain: POST https://api.artsy.net/api/tokens/xapp_token with client_id + client_secret
+  detail: authentication/artsy-authentication.yml
+tool_count: 53
+tools:
+- name: list_applications
+  description: Retrieve a collection of applications.
+  source_operation: openapi/artsy-public-api-openapi.yml#getApiApplications
+  method: GET
+  path: /api/applications
+  category: applications
+  input_schema_source: openapi parameters + requestBody of the source operation
+  parameters:
+  - offset
+  - size
+  - cursor
+  - user_id
+- name: create_applications
+  description: Create an application.
+  source_operation: openapi/artsy-public-api-openapi.yml#postApiApplications
+  method: POST
+  path: /api/applications
+  category: applications
+  input_schema_source: openapi parameters + requestBody of the source operation
+  parameters:
+  - postApiApplications
+- name: get_applications
+  description: Retrieve an application by id.
+  source_operation: openapi/artsy-public-api-openapi.yml#getApiApplicationsId
+  method: GET
+  path: /api/applications/{id}
+  category: applications
+  input_schema_source: openapi parameters + requestBody of the source operation
+  parameters:
+  - id
+- name: update_applications
+  description: Update an application.
+  source_operation: openapi/artsy-public-api-openapi.yml#putApiApplicationsId
+  method: PUT
+  path: /api/applications/{id}
+  category: applications
+  input_schema_source: openapi parameters + requestBody of the source operation
+  parameters:
+  - id
+  - putApiApplicationsId
+- name: delete_applications
+  description: Delete an application.
+  source_operation: openapi/artsy-public-api-openapi.yml#deleteApiApplicationsId
+  method: DELETE
+  path: /api/applications/{id}
+  category: applications
+  input_schema_source: openapi parameters + requestBody of the source operation
+  parameters:
+  - id
+- name: list_artists
+  description: Retrieve a collection of artists.
+  source_operation: openapi/artsy-public-api-openapi.yml#getApiArtists
+  method: GET
+  path: /api/artists
+  category: artists
+  input_schema_source: openapi parameters + requestBody of the source operation
+  parameters:
+  - artwork_id
+  - sale_id
+  - similar_to_artist_id
+  - similarity_type
+  - gene_id
+  - artworks
+  - published_artworks
+  - partner_id
+  - sort
+  - offset
+  - size
+  - cursor
+  - sample
+  - term
+- name: get_artists
+  description: Retrieve an artist by id.
+  source_operation: openapi/artsy-public-api-openapi.yml#getApiArtistsId
+  method: GET
+  path: /api/artists/{id}
+  category: artists
+  input_schema_source: openapi parameters + requestBody of the source operation
+  parameters:
+  - id
+- name: list_artworks
+  description: Retrieve a collection of artworks.
+  source_operation: openapi/artsy-public-api-openapi.yml#getApiArtworks
+  method: GET
+  path: /api/artworks
+  category: artworks
+  input_schema_source: openapi parameters + requestBody of the source operation
+  parameters:
+  - offset
+  - size
+  - cursor
+  - sample
+  - term
+  - page
+  - exact
+  - artist_id
+  - partner_id
+  - show_id
+  - collection_id
+  - user_id
+  - similar_to_artwork_id
+  - published
+- name: get_artworks
+  description: Retrieve an artwork by id.
+  source_operation: openapi/artsy-public-api-openapi.yml#getApiArtworksId
+  method: GET
+  path: /api/artworks/{id}
+  category: artworks
+  input_schema_source: openapi parameters + requestBody of the source operation
+  parameters:
+  - id
+- name: get_bidder_positions
+  description: Retrieve a bidder position.
+  source_operation: openapi/artsy-public-api-openapi.yml#getApiBidderPositionsId
+  method: GET
+  path: /api/bidder_positions/{id}
+  category: bidder_positions
+  input_schema_source: openapi parameters + requestBody of the source operation
+  parameters:
+  - id
+- name: list_bidders
+  description: Retrieve bidders.
+  source_operation: openapi/artsy-public-api-openapi.yml#getApiBidders
+  method: GET
+  path: /api/bidders
+  category: bidders
+  input_schema_source: openapi parameters + requestBody of the source operation
+  parameters:
+  - offset
+  - size
+  - cursor
+  - sale_id
+  - with_positions
+  - sort
+- name: get_bidders
+  description: Retrieve a bidder by id.
+  source_operation: openapi/artsy-public-api-openapi.yml#getApiBiddersId
+  method: GET
+  path: /api/bidders/{id}
+  category: bidders
+  input_schema_source: openapi parameters + requestBody of the source operation
+  parameters:
+  - id
+- name: list_collection_items
+  description: Retrieve collection items.
+  source_operation: openapi/artsy-public-api-openapi.yml#getApiCollectionItems
+  method: GET
+  path: /api/collection_items
+  category: collection_items
+  input_schema_source: openapi parameters + requestBody of the source operation
+  parameters:
+  - offset
+  - size
+  - cursor
+  - collection_id
+  - user_id
+  - artwork_id
+- name: get_collection_items
+  description: Retrieve a collection item by id.
+  source_operation: openapi/artsy-public-api-openapi.yml#getApiCollectionItemsId
+  method: GET
+  path: /api/collection_items/{id}
+  category: collection_items
+  input_schema_source: openapi parameters + requestBody of the source operation
+  parameters:
+  - id
+  - collection_id
+  - user_id
+- name: list_collector_profiles
+  description: Retrieve collector profiles.
+  source_operation: openapi/artsy-public-api-openapi.yml#getApiCollectorProfiles
+  method: GET
+  path: /api/collector_profiles
+  category: collector_profiles
+  input_schema_source: openapi parameters + requestBody of the source operation
+  parameters:
+  - owner_id
+  - offset
+  - size
+  - cursor
+  - sample
+- name: get_collector_profiles
+  description: Retrieve a collector profile.
+  source_operation: openapi/artsy-public-api-openapi.yml#getApiCollectorProfilesId
+  method: GET
+  path: /api/collector_profiles/{id}
+  category: collector_profiles
+  input_schema_source: openapi parameters + requestBody of the source operation
+  parameters:
+  - id
+- name: list_current_user
+  description: Retrieve the current user.
+  source_operation: openapi/artsy-public-api-openapi.yml#getApiCurrentUser
+  method: GET
+  path: /api/current_user
+  category: current_user
+  input_schema_source: openapi parameters + requestBody of the source operation
+  parameters: []
+- name: list_devices
+  description: Retrieve devices.
+  source_operation: openapi/artsy-public-api-openapi.yml#getApiDevices
+  method: GET
+  path: /api/devices
+  category: devices
+  input_schema_source: openapi parameters + requestBody of the source operation
+  parameters:
+  - offset
+  - size
+  - cursor
+  - user_id
+  - app_id
+- name: get_devices
+  description: Retrieve individual device.
+  source_operation: openapi/artsy-public-api-openapi.yml#getApiDevicesId
+  method: GET
+  path: /api/devices/{id}
+  category: devices
+  input_schema_source: openapi parameters + requestBody of the source operation
+  parameters:
+  - id
+- name: delete_devices
+  description: Delete individual device.
+  source_operation: openapi/artsy-public-api-openapi.yml#deleteApiDevicesId
+  method: DELETE
+  path: /api/devices/{id}
+  category: devices
+  input_schema_source: openapi parameters + requestBody of the source operation
+  parameters:
+  - id
+- name: list_editions
+  description: Retrieve a collection of edition sets.
+  source_operation: openapi/artsy-public-api-openapi.yml#getApiEditions
+  method: GET
+  path: /api/editions
+  category: editions
+  input_schema_source: openapi parameters + requestBody of the source operation
+  parameters:
+  - offset
+  - size
+  - cursor
+  - artwork_id
+  - public
+- name: get_editions
+  description: Retrieve an edition set for an artwork by id.
+  source_operation: openapi/artsy-public-api-openapi.yml#getApiEditionsId
+  method: GET
+  path: /api/editions/{id}
+  category: editions
+  input_schema_source: openapi parameters + requestBody of the source operation
+  parameters:
+  - id
+  - artwork_id
+- name: list_fairs
+  description: Retrieve a collection of fairs.
+  source_operation: openapi/artsy-public-api-openapi.yml#getApiFairs
+  method: GET
+  path: /api/fairs
+  category: fairs
+  input_schema_source: openapi parameters + requestBody of the source operation
+  parameters:
+  - status
+  - offset
+  - size
+  - cursor
+  - sample
+  - sort
+- name: get_fairs
+  description: Retrieve a fair by id.
+  source_operation: openapi/artsy-public-api-openapi.yml#getApiFairsId
+  method: GET
+  path: /api/fairs/{id}
+  category: fairs
+  input_schema_source: openapi parameters + requestBody of the source operation
+  parameters:
+  - id
+- name: list_genes
+  description: Retrieve genes.
+  source_operation: openapi/artsy-public-api-openapi.yml#getApiGenes
+  method: GET
+  path: /api/genes
+  category: genes
+  input_schema_source: openapi parameters + requestBody of the source operation
+  parameters:
+  - artist_id
+  - artwork_id
+  - offset
+  - size
+  - cursor
+  - sample
+- name: get_genes
+  description: Retrieve a gene by id.
+  source_operation: openapi/artsy-public-api-openapi.yml#getApiGenesId
+  method: GET
+  path: /api/genes/{id}
+  category: genes
+  input_schema_source: openapi parameters + requestBody of the source operation
+  parameters:
+  - id
+- name: list_images
+  description: Retrieve a collection of images.
+  source_operation: openapi/artsy-public-api-openapi.yml#getApiImages
+  method: GET
+  path: /api/images
+  category: images
+  input_schema_source: openapi parameters + requestBody of the source operation
+  parameters:
+  - show_id
+  - offset
+  - size
+  - cursor
+  - sample
+- name: get_images
+  description: Retrieve an image by id.
+  source_operation: openapi/artsy-public-api-openapi.yml#getApiImagesId
+  method: GET
+  path: /api/images/{id}
+  category: images
+  input_schema_source: openapi parameters + requestBody of the source operation
+  parameters:
+  - id
+- name: list_lot_standings
+  description: Retrieve standings of individual bidders on lots.
+  source_operation: openapi/artsy-public-api-openapi.yml#getApiLotStandings
+  method: GET
+  path: /api/lot_standings
+  category: lot_standings
+  input_schema_source: openapi parameters + requestBody of the source operation
+  parameters:
+  - bidder_id
+- name: list_partner_communications
+  description: Retrieve a collection of partner communications.
+  source_operation: openapi/artsy-public-api-openapi.yml#getApiPartnerCommunications
+  method: GET
+  path: /api/partner_communications
+  category: partner_communications
+  input_schema_source: openapi parameters + requestBody of the source operation
+  parameters:
+  - name
+  - offset
+  - size
+  - cursor
+- name: get_partner_communications
+  description: Retrieve a partner communication by id.
+  source_operation: openapi/artsy-public-api-openapi.yml#getApiPartnerCommunicationsId
+  method: GET
+  path: /api/partner_communications/{id}
+  category: partner_communications
+  input_schema_source: openapi parameters + requestBody of the source operation
+  parameters:
+  - id
+- name: list_partner_contacts
+  description: Retrieve a collection of partner contacts by partner_id.
+  source_operation: openapi/artsy-public-api-openapi.yml#getApiPartnerContacts
+  method: GET
+  path: /api/partner_contacts
+  category: partner_contacts
+  input_schema_source: openapi parameters + requestBody of the source operation
+  parameters:
+  - partner_id
+  - can_contact
+  - partner_communication_id
+  - offset
+  - size
+  - cursor
+  - sample
+- name: get_partner_contacts
+  description: Retrieve a partner contact by id.
+  source_operation: openapi/artsy-public-api-openapi.yml#getApiPartnerContactsId
+  method: GET
+  path: /api/partner_contacts/{id}
+  category: partner_contacts
+  input_schema_source: openapi parameters + requestBody of the source operation
+  parameters:
+  - id
+- name: list_partners
+  description: Retrieve a collection of partners.
+  source_operation: openapi/artsy-public-api-openapi.yml#getApiPartners
+  method: GET
+  path: /api/partners
+  category: partners
+  input_schema_source: openapi parameters + requestBody of the source operation
+  parameters:
+  - user_id
+  - partner_id
+  - eligible_for_partner_analytics
+  - offset
+  - size
+  - cursor
+  - sample
+- name: get_partners
+  description: Retrieve a partner by id.
+  source_operation: openapi/artsy-public-api-openapi.yml#getApiPartnersId
+  method: GET
+  path: /api/partners/{id}
+  category: partners
+  input_schema_source: openapi parameters + requestBody of the source operation
+  parameters:
+  - id
+- name: list_profiles
+  description: Retrieve a collection of profiles.
+  source_operation: openapi/artsy-public-api-openapi.yml#getApiProfiles
+  method: GET
+  path: /api/profiles
+  category: profiles
+  input_schema_source: openapi parameters + requestBody of the source operation
+  parameters:
+  - offset
+  - size
+  - cursor
+  - sample
+- name: get_profiles
+  description: Retrieve a profile by id.
+  source_operation: openapi/artsy-public-api-openapi.yml#getApiProfilesId
+  method: GET
+  path: /api/profiles/{id}
+  category: profiles
+  input_schema_source: openapi parameters + requestBody of the source operation
+  parameters:
+  - id
+- name: list_sale_artworks
+  description: Retrieve sale artworks.
+  source_operation: openapi/artsy-public-api-openapi.yml#getApiSaleArtworks
+  method: GET
+  path: /api/sale_artworks
+  category: sale_artworks
+  input_schema_source: openapi parameters + requestBody of the source operation
+  parameters:
+  - offset
+  - size
+  - cursor
+  - sale_id
+  - published
+  - artwork_id
+  - sort
+- name: get_sale_artworks
+  description: Retrieve a sale_artwork by id.
+  source_operation: openapi/artsy-public-api-openapi.yml#getApiSaleArtworksId
+  method: GET
+  path: /api/sale_artworks/{id}
+  category: sale_artworks
+  input_schema_source: openapi parameters + requestBody of the source operation
+  parameters:
+  - id
+- name: list_sales
+  description: Retrieve sales.
+  source_operation: openapi/artsy-public-api-openapi.yml#getApiSales
+  method: GET
+  path: /api/sales
+  category: sales
+  input_schema_source: openapi parameters + requestBody of the source operation
+  parameters:
+  - offset
+  - size
+  - cursor
+  - live
+  - is_auction
+  - published
+  - sort
+- name: get_sales
+  description: Retrieve a sale by id.
+  source_operation: openapi/artsy-public-api-openapi.yml#getApiSalesId
+  method: GET
+  path: /api/sales/{id}
+  category: sales
+  input_schema_source: openapi parameters + requestBody of the source operation
+  parameters:
+  - id
+- name: list_search
+  description: Search for anything.
+  source_operation: openapi/artsy-public-api-openapi.yml#getApiSearch
+  method: GET
+  path: /api/search
+  category: search
+  input_schema_source: openapi parameters + requestBody of the source operation
+  parameters:
+  - q
+  - offset
+  - size
+  - type
+- name: list_shows
+  description: Retrieve a collection of shows.
+  source_operation: openapi/artsy-public-api-openapi.yml#getApiShows
+  method: GET
+  path: /api/shows
+  category: shows
+  input_schema_source: openapi parameters + requestBody of the source operation
+  parameters:
+  - status
+  - partner_id
+  - fair_id
+  - offset
+  - size
+  - cursor
+  - sample
+- name: get_shows
+  description: Retrieve a show by id.
+  source_operation: openapi/artsy-public-api-openapi.yml#getApiShowsId
+  method: GET
+  path: /api/shows/{id}
+  category: shows
+  input_schema_source: openapi parameters + requestBody of the source operation
+  parameters:
+  - id
+- name: list_status
+  description: Return API status.
+  source_operation: openapi/artsy-public-api-openapi.yml#getApiStatus
+  method: GET
+  path: /api/status
+  category: status
+  input_schema_source: openapi parameters + requestBody of the source operation
+  parameters: []
+- name: list_tokens
+  description: Retrieve tokens supported by this API.
+  source_operation: openapi/artsy-public-api-openapi.yml#getApiTokens
+  method: GET
+  path: /api/tokens
+  category: tokens
+  input_schema_source: openapi parameters + requestBody of the source operation
+  parameters: []
+- name: delete_tokens_access_token
+  description: Expire an OAuth access token.
+  source_operation: openapi/artsy-public-api-openapi.yml#deleteApiTokensAccessToken
+  method: DELETE
+  path: /api/tokens/access_token
+  category: tokens
+  input_schema_source: openapi parameters + requestBody of the source operation
+  parameters:
+  - access_token
+- name: create_tokens_xapp_token
+  description: Create a new XAPP access token.
+  source_operation: openapi/artsy-public-api-openapi.yml#postApiTokensXappToken
+  method: POST
+  path: /api/tokens/xapp_token
+  category: tokens
+  input_schema_source: openapi parameters + requestBody of the source operation
+  parameters:
+  - postApiTokensXappToken
+- name: get_user_details
+  description: Retrieve user details by user id.
+  source_operation: openapi/artsy-public-api-openapi.yml#getApiUserDetailsId
+  method: GET
+  path: /api/user_details/{id}
+  category: user_details
+  input_schema_source: openapi parameters + requestBody of the source operation
+  parameters:
+  - id
+- name: list_user_fair_actions
+  description: Retrieve user fair actions.
+  source_operation: openapi/artsy-public-api-openapi.yml#getApiUserFairActions
+  method: GET
+  path: /api/user_fair_actions
+  category: user_fair_actions
+  input_schema_source: openapi parameters + requestBody of the source operation
+  parameters:
+  - owner_type
+  - owner_id
+  - user_id
+  - fair_id
+  - offset
+  - size
+  - cursor
+  - sample
+- name: get_user_fair_actions
+  description: Retrieve a user fair action.
+  source_operation: openapi/artsy-public-api-openapi.yml#getApiUserFairActionsId
+  method: GET
+  path: /api/user_fair_actions/{id}
+  category: user_fair_actions
+  input_schema_source: openapi parameters + requestBody of the source operation
+  parameters:
+  - id
+- name: list_users
+  description: Retrieve a collection of users.
+  source_operation: openapi/artsy-public-api-openapi.yml#getApiUsers
+  method: GET
+  path: /api/users
+  category: users
+  input_schema_source: openapi parameters + requestBody of the source operation
+  parameters:
+  - offset
+  - size
+  - cursor
+  - sample
+  - term
+  - page
+  - exact
+- name: get_users
+  description: Retrieve a user by id.
+  source_operation: openapi/artsy-public-api-openapi.yml#getApiUsersId
+  method: GET
+  path: /api/users/{id}
+  category: users
+  input_schema_source: openapi parameters + requestBody of the source operation
+  parameters:
+  - id

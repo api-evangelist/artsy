@@ -1,0 +1,116 @@
+generated: '2026-09-07'
+method: derived
+source: >-
+  openapi/artsy-public-api-openapi.yml, graphql/artsy-metaphysics.graphql,
+  https://developers.artsy.net/v2/docs/http, https://developers.artsy.net/v2/docs/authentication
+note: >-
+  Cross-cutting standards only. Every conforms:true row names the exact location that proves it; every
+  conforms:false row is a real negative measured against the same sources, not a placeholder.
+standards:
+  - id: swagger-2.0
+    conforms: true
+    evidence: >-
+      The provider serves a Swagger 2.0 document at https://api.artsy.net/api/docs/ — "swagger": "2.0",
+      49 paths, 53 operations, all with unique operationIds.
+  - id: openapi-3
+    conforms: false
+    evidence: The published contract is Swagger 2.0; no OpenAPI 3.x document is served.
+  - id: json-hal
+    conforms: true
+    evidence: >-
+      "produces": ["application/hal+json", "application/json"] in the contract, and every response body
+      carries _links / _embedded. The provider documents JSON+HAL as the response format on
+      https://developers.artsy.net/v2/docs/http.
+  - id: rfc6570-uri-templates
+    conforms: true
+    evidence: >-
+      The API root returns 50 link relations, of which the collection and item relations carry
+      "templated": true with RFC 6570 expressions, e.g.
+      https://api.artsy.net/api/artworks{?artist_id,partner_id,show_id,...}
+  - id: rfc8288-web-linking
+    conforms: partial
+    evidence: >-
+      Link relations are carried in the HAL _links body object rather than in an HTTP Link header. The
+      relation semantics are documented at https://developers.artsy.net/v2/docs/links.
+  - id: oauth2
+    conforms: true
+    evidence: >-
+      https://api.artsy.net/oauth2/authorize and https://api.artsy.net/oauth2/access_token, with
+      authorization_code and a password-style "credentials" grant, documented at
+      https://developers.artsy.net/v2/docs/authentication. NOTE the contract itself declares no
+      securityDefinitions, so this is documented but not machine-readable.
+  - id: oidc
+    conforms: false
+    evidence: >-
+      No /.well-known/openid-configuration on any Artsy host (see well-known/artsy-well-known.yml);
+      no id_token is issued.
+  - id: rfc8414-oauth-metadata
+    conforms: false
+    evidence: /.well-known/oauth-authorization-server returned 404 on every probed host.
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: >-
+      Errors use a bespoke {type, message, detail} JSON envelope, not application/problem+json. See
+      errors/artsy-problem-types.yml.
+  - id: json-api
+    conforms: false
+    evidence: The response format is HAL, not JSON:API.
+  - id: cursor-pagination
+    conforms: true
+    evidence: >-
+      cursor/size/offset parameters with _links.next, documented at
+      https://developers.artsy.net/v2/docs/pagination. Cursor is the provider's stated preference.
+  - id: idempotency
+    conforms: false
+    evidence: >-
+      No idempotency key or replay-safety mechanism anywhere in the documentation or contract. See
+      conventions/artsy-conventions.yml idempotency.coverage = none.
+  - id: graphql
+    conforms: true
+    evidence: >-
+      Metaphysics, Artsy's GraphQL gateway, at https://metaphysics-production.artsy.net/v2. SDL of
+      1,478 object types and 352 input types published by Artsy at
+      https://github.com/artsy/metaphysics/blob/main/_schemaV2.graphql and saved to
+      graphql/artsy-metaphysics.graphql.
+  - id: graphql-introspection
+    conforms: false
+    evidence: >-
+      A live POST of {__schema{queryType{name}}} to https://metaphysics-production.artsy.net/v2 returns
+      "GraphQL introspection has been disabled". The schema is published out of band in the repo instead.
+  - id: relay-global-object-identification
+    conforms: true
+    evidence: >-
+      The Metaphysics SDL uses Relay connection types and Relay global "id" fields, with database
+      identifiers exposed separately as internalID. Stated by Artsy in metaphysics AGENTS.md.
+  - id: rfc9116-security-txt
+    conforms: false
+    evidence: /.well-known/security.txt returned 404/530 on all six probed Artsy hosts.
+  - id: rfc8594-sunset-header
+    conforms: false
+    evidence: >-
+      The Public API retirement is announced in prose on developers.artsy.net only; no Sunset or
+      Deprecation header and no dated sunset is published.
+  - id: rfc9116-a2a-agent-card
+    conforms: false
+    evidence: No agent card at /.well-known/agent-card.json or /.well-known/agent.json on any host.
+  - id: llms-txt
+    conforms: true
+    evidence: >-
+      https://www.artsy.net/llms.txt — HTTP 200, text/plain, 4,452 bytes, well-formed llms.txt with an
+      H1, a blockquote summary and ten sectioned link lists. Saved verbatim to llms/artsy-llms.txt.
+domain_standards:
+  probed: true
+  found: []
+  note: >-
+    REWARD-ONLY and genuinely empty here. The art-market sector has no adopted machine-readable
+    interchange standard of the kind this check looks for (no SCIM/OData/OpenRTB/FHIR/LTI/OAI-PMH/
+    ISO-20022 analogue). The nearest domain vocabulary in play is Artsy's own proprietary Art Genome
+    Project gene taxonomy, exposed at /api/genes — a first-party vocabulary, not an industry standard,
+    so it is recorded as a vocabulary rather than claimed as domain-standard conformance.
+    CIDOC-CRM, LIDO and IIIF are the museum-sector standards that would qualify; the Artsy contract
+    declares none of them.
+compliance_program:
+  published: false
+  note: >-
+    No trust center, no named certifications (SOC 2 / ISO 27001 / PCI / HIPAA / FedRAMP) were found on
+    any Artsy host. No Compliance pointer is emitted.

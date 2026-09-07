@@ -1,0 +1,188 @@
+generated: '2026-09-07'
+method: derived
+source: >-
+  openapi/artsy-public-api-openapi.yml and a live 200 fetch of the HAL root at
+  https://api.artsy.net/api/ (50 link relations, 2026-09-07)
+note: >-
+  The published Swagger declares only THREE definitions — request bodies for creating an application,
+  updating an application, and minting an XAPP token — so there is no schema graph to walk. The entity
+  graph below is instead derived from the RFC 6570 templated link relations the API root actually
+  serves: every *_id query parameter on a collection template is a declared foreign key, and that is
+  the machine-readable relationship evidence this API does publish. Nothing here is inferred from
+  documentation prose or invented.
+identifier_convention:
+  form: 24-character hexadecimal (MongoDB ObjectId shaped)
+  example: 4d8b92b34eb68a1b2c0003f4
+  slugs: >-
+    Most item paths also accept a human-readable slug in place of the id, e.g.
+    /api/artists/andy-warhol. The slug and the id resolve to the same resource.
+  prefixes: none — Artsy does not use typed id prefixes
+  graphql_divergence: >-
+    In Metaphysics the "id" field is a Relay global identifier and the database id is "internalID".
+    See conventions/artsy-conventions.yml.
+entities:
+  - name: artist
+    collection: /api/artists
+    item: /api/artists/{id}
+    operations: [getApiArtists, getApiArtistsId]
+    filters: [artwork_id, similar_to_artist_id, similarity_type, published_artworks, artworks, term]
+  - name: artwork
+    collection: /api/artworks
+    item: /api/artworks/{id}
+    operations: [getApiArtworks, getApiArtworksId]
+    filters: [artist_id, partner_id, show_id, similar_to_artwork_id, published, term]
+  - name: edition
+    collection: /api/editions
+    item: /api/editions/{id}
+    operations: [getApiEditions, getApiEditionsId]
+    filters: [artwork_id]
+  - name: image
+    collection: /api/images
+    item: /api/images/{id}
+    operations: [getApiImages, getApiImagesId]
+  - name: gene
+    collection: /api/genes
+    item: /api/genes/{id}
+    operations: [getApiGenes, getApiGenesId]
+    filters: [artist_id, artwork_id]
+    note: >-
+      Artsy's Art Genome Project classification taxonomy — the provider's proprietary vocabulary for
+      style, period, subject and medium.
+  - name: partner
+    collection: /api/partners
+    item: /api/partners/{id}
+    operations: [getApiPartners, getApiPartnersId]
+    filters: [partner_id, user_id, eligible_for_partner_analytics]
+    note: Galleries, museums, institutions and auction houses.
+  - name: partner_contact
+    collection: /api/partner_contacts
+    item: /api/partner_contacts/{id}
+    operations: [getApiPartnerContacts, getApiPartnerContactsId]
+    filters: [partner_id, partner_communication_id, can_contact]
+  - name: partner_communication
+    collection: /api/partner_communications
+    item: /api/partner_communications/{id}
+    operations: [getApiPartnerCommunications, getApiPartnerCommunicationsId]
+    filters: [name]
+  - name: profile
+    collection: /api/profiles
+    item: /api/profiles/{id}
+    operations: [getApiProfiles, getApiProfilesId]
+  - name: show
+    collection: /api/shows
+    item: /api/shows/{id}
+    operations: [getApiShows, getApiShowsId]
+    filters: [fair_id, partner_id, status]
+  - name: fair
+    collection: /api/fairs
+    item: /api/fairs/{id}
+    operations: [getApiFairs, getApiFairsId]
+    filters: [status]
+  - name: sale
+    collection: /api/sales
+    item: /api/sales/{id}
+    operations: [getApiSales, getApiSalesId]
+    filters: [is_auction, live, published]
+  - name: sale_artwork
+    collection: /api/sale_artworks
+    item: /api/sale_artworks/{id}
+    operations: [getApiSaleArtworks, getApiSaleArtworksId]
+    filters: [sale_id, published]
+    note: The join entity that puts an artwork into a sale as a lot.
+  - name: bidder
+    collection: /api/bidders
+    item: /api/bidders/{id}
+    operations: [getApiBidders, getApiBiddersId]
+    filters: [sale_id]
+  - name: bidder_position
+    collection: /api/bidder_positions
+    item: /api/bidder_positions/{id}
+    operations: [getApiBidders, getApiBidderPositionsId]
+    filters: [sale_artwork_id]
+  - name: lot_standing
+    collection: /api/lot_standings
+    operations: [getApiLotStandings]
+  - name: user
+    collection: /api/users
+    item: /api/users/{id}
+    operations: [getApiUsers, getApiUsersId]
+    filters: [term]
+  - name: user_detail
+    item: /api/user_details/{id}
+    operations: [getApiUserDetailsId]
+  - name: current_user
+    item: /api/current_user
+    operations: [getApiCurrentUser]
+  - name: collector_profile
+    collection: /api/collector_profiles
+    item: /api/collector_profiles/{id}
+    operations: [getApiCollectorProfiles, getApiCollectorProfilesId]
+    filters: [owner_id]
+  - name: collection
+    collection: /api/collections
+    item: /api/collections/{id}
+    filters: [user_id, private]
+  - name: collection_item
+    collection: /api/collection_items
+    item: /api/collection_items/{id}
+    operations: [getApiCollectionItems, getApiCollectionItemsId]
+    filters: [user_id, collection_id, artwork_id]
+  - name: user_fair_action
+    collection: /api/user_fair_actions
+    item: /api/user_fair_actions/{id}
+    operations: [getApiUserFairActions, getApiUserFairActionsId]
+    filters: [user_id, owner_id, owner_type]
+    note: Polymorphic — owner_type plus owner_id, so the target entity is not statically typed.
+  - name: device
+    collection: /api/devices
+    item: /api/devices/{id}
+    operations: [getApiDevices, getApiDevicesId, deleteApiDevicesId]
+    filters: [user_id, app_id]
+  - name: application
+    collection: /api/applications
+    item: /api/applications/{id}
+    operations: [getApiApplications, postApiApplications, getApiApplicationsId, putApiApplicationsId, deleteApiApplicationsId]
+    schema: postApiApplications / putApiApplicationsId
+  - name: token
+    collection: /api/tokens
+    operations: [getApiTokens, postApiTokensXappToken, deleteApiTokensAccessToken]
+    schema: postApiTokensXappToken
+relationships:
+  - {from: artwork, to: artist, kind: belongs_to, via: artist_id, evidence: 'templated link /api/artworks{?artist_id}'}
+  - {from: artwork, to: partner, kind: belongs_to, via: partner_id, evidence: 'templated link /api/artworks{?partner_id}'}
+  - {from: artwork, to: show, kind: belongs_to, via: show_id, evidence: 'templated link /api/artworks{?show_id}'}
+  - {from: artist, to: artwork, kind: has_many, via: artwork_id, evidence: 'templated link /api/artists{?artwork_id}'}
+  - {from: artist, to: artist, kind: has_many, via: similar_to_artist_id, evidence: 'templated link /api/artists{?similar_to_artist_id,similarity_type}', note: 'self-referential similarity edge with a typed similarity_type'}
+  - {from: artwork, to: artwork, kind: has_many, via: similar_to_artwork_id, evidence: 'templated link /api/artworks{?similar_to_artwork_id}'}
+  - {from: edition, to: artwork, kind: belongs_to, via: artwork_id, evidence: 'templated link /api/edition{?artwork_id}'}
+  - {from: gene, to: artist, kind: has_many, via: artist_id, evidence: 'templated link /api/genes{?artist_id}'}
+  - {from: gene, to: artwork, kind: has_many, via: artwork_id, evidence: 'templated link /api/genes{?artwork_id}'}
+  - {from: show, to: fair, kind: belongs_to, via: fair_id, evidence: 'templated link /api/shows{?fair_id}'}
+  - {from: show, to: partner, kind: belongs_to, via: partner_id, evidence: 'templated link /api/shows{?partner_id}'}
+  - {from: sale_artwork, to: sale, kind: belongs_to, via: sale_id, evidence: 'templated link /api/sale_artworks{?sale_id}'}
+  - {from: bidder, to: sale, kind: belongs_to, via: sale_id, evidence: 'templated link /api/bidders{?sale_id}'}
+  - {from: bidder_position, to: sale_artwork, kind: belongs_to, via: sale_artwork_id, evidence: 'templated link /api/bidder_positions{?sale_artwork_id}'}
+  - {from: collection, to: user, kind: belongs_to, via: user_id, evidence: 'templated link /api/collections{?user_id}'}
+  - {from: collection_item, to: collection, kind: belongs_to, via: collection_id, evidence: 'templated link /api/collection_items{?collection_id}'}
+  - {from: collection_item, to: artwork, kind: belongs_to, via: artwork_id, evidence: 'templated link /api/collection_items{?artwork_id}'}
+  - {from: collection_item, to: user, kind: belongs_to, via: user_id, evidence: 'templated link /api/collection_items{?user_id}'}
+  - {from: collector_profile, to: user, kind: belongs_to, via: owner_id, evidence: 'templated link /api/collector_profiles{?owner_id}'}
+  - {from: partner_contact, to: partner, kind: belongs_to, via: partner_id, evidence: 'templated link /api/partner_contacts{?partner_id}'}
+  - {from: partner_contact, to: partner_communication, kind: belongs_to, via: partner_communication_id, evidence: 'templated link /api/partner_contacts{?partner_communication_id}'}
+  - {from: partner, to: user, kind: has_many, via: user_id, evidence: 'templated link /api/partners{?user_id}'}
+  - {from: device, to: user, kind: belongs_to, via: user_id, evidence: 'templated link /api/devices{?user_id}'}
+  - {from: device, to: application, kind: belongs_to, via: app_id, evidence: 'templated link /api/devices{?app_id}'}
+  - {from: user_fair_action, to: user, kind: belongs_to, via: user_id, evidence: 'templated link /api/user_fair_actions{?user_id}'}
+  - {from: user_fair_action, to: '*', kind: belongs_to, via: 'owner_id + owner_type', evidence: 'templated link /api/user_fair_actions{?owner_id,owner_type}', note: polymorphic}
+counts:
+  entities: 26
+  relationships: 26
+  schemas_in_contract: 3
+gaps:
+  - >-
+    No response schemas are declared anywhere in the contract, so a code-generated client gets no
+    types back from any of the 53 operations. The shapes above are reachable only by calling the API
+    and reading HAL.
+  - >-
+    Timestamps (created_at, updated_at) and the id field are documented in prose on
+    https://developers.artsy.net/v2/docs/http, not in the machine-readable contract.

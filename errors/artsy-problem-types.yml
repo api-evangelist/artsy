@@ -1,0 +1,88 @@
+generated: '2026-09-07'
+method: searched
+source: https://developers.artsy.net/v2/docs/errors
+supplemented_from:
+  - https://developers.artsy.net/v2/docs/http
+  - https://developers.artsy.net/v2/docs/rate_limiting
+  - openapi/artsy-public-api-openapi.yml
+format: bespoke-json
+rfc9457: false
+note: >-
+  The harvested Swagger 2.0 documents ONLY 2xx responses — 200, 201 and 204 across all 53 operations —
+  so nothing about failure can be derived from the contract. Everything below is read from the
+  provider's own error reference. Artsy does not use application/problem+json; it publishes a small
+  three-field envelope of its own.
+envelope:
+  content_type: application/json
+  fields:
+    - {name: type, description: 'Error type. Observed values: auth_error, param_error, other_error.'}
+    - {name: message, description: Human-readable error message.}
+    - {name: detail, description: 'Per-field detail map, present on param_error. Keys are field names, values are arrays of messages.'}
+  oauth_envelope:
+    scope: the /oauth2/authorize and /oauth2/access_token endpoints
+    fields: [error, error_description]
+error_types:
+  - type: auth_error
+    meaning: The access token is missing, invalid, or has expired.
+    example_message: The access token is invalid or has expired.
+    remediation: >-
+      Mint a fresh token. For anonymous reads POST client_id/client_secret to /api/tokens/xapp_token;
+      for user-bound calls re-run an /oauth2/access_token grant.
+  - type: param_error
+    meaning: One or more request parameters failed validation.
+    example_message: Email can't be blank, Email is invalid, Password can't be blank.
+    detail_shape: '{"email": ["can''t be blank", "is invalid"], "password": ["can''t be blank"]}'
+    remediation: Read the detail map; it names each failing field and every reason for it.
+  - type: other_error
+    meaning: A general failure, including resource-not-found.
+    example_message: Artist Not Found
+    remediation: Verify the id or slug against a collection listing before retrying.
+problems:
+  - status: 400
+    title: Mutually exclusive pagination parameters
+    detail: >-
+      Supplying both cursor and offset on a paginated call returns an explicit 400. Documented on the
+      pagination page, not in the spec.
+    source: https://developers.artsy.net/v2/docs/pagination
+  - status: 401
+    type: auth_error
+    title: Unauthorized
+    detail: >-
+      Missing or expired X-Xapp-Token / X-Auth-Token. Artsy ships a documented easter egg here: the
+      reason phrase may be returned as "401 Broadway" (the address of Artsy HQ) instead of
+      "401 Unauthorized". A client that string-matches the reason phrase rather than the numeric status
+      will misread this response.
+    source: https://developers.artsy.net/v2/docs/errors
+  - status: 404
+    type: other_error
+    title: Not found
+    detail: Returned as an other_error envelope, e.g. {"type":"other_error","message":"Artist Not Found"}.
+    source: https://developers.artsy.net/v2/docs/errors
+  - status: 406
+    title: Not Acceptable
+    detail: >-
+      A POST or PUT carrying a Content-Type other than application/json or
+      application/x-www-form-urlencoded. Body is {"error": "The requested content-type '...' is not
+      supported."} — note this uses the OAuth-shaped "error" key, not the three-field envelope.
+    source: https://developers.artsy.net/v2/docs/http
+  - status: 429
+    title: Too many requests
+    detail: >-
+      Over 5 requests per second per client application ID. The provider states clients are throttled,
+      not blacklisted. No Retry-After or RateLimit-* header is documented.
+    retry: back off and retry; no reset signal is published
+    source: https://developers.artsy.net/v2/docs/rate_limiting
+  - status: 500
+    title: Internal server error
+    detail: >-
+      The provider states 50x responses are not expected and asks that they be reported to
+      artsy-api-developers@googlegroups.com.
+    source: https://developers.artsy.net/v2/docs/errors
+gaps:
+  - >-
+    No error response is declared on any of the 53 operations in the published contract, so a
+    code-generated client gets no failure types at all. This is the single largest contract-quality gap
+    on the Artsy Public API.
+  - >-
+    The 401 reason-phrase easter egg ("401 Broadway") is undocumented in the spec and is a real
+    interoperability hazard for any client that parses the reason phrase.

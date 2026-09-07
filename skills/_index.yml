@@ -1,0 +1,32 @@
+generated: '2026-09-07'
+method: generated
+source: >-
+  openapi/artsy-public-api-openapi.yml (53 operations, all operationIds verified against the harvested
+  contract), plus conventions/, errors/, lifecycle/ and data-model/ for the cross-cutting rules.
+note: >-
+  Artsy publishes no agent skills of its own. The metaphysics repository carries an AGENTS.md, but it is
+  contributor guidance for writing GraphQL resolvers in that codebase, not operating instructions for a
+  consumer — its one consumer-relevant rule (internalID vs the Relay id) is captured in
+  conventions/artsy-conventions.yml instead. The five skills below are GENERATED and every operationId
+  in them exists verbatim in the harvested contract.
+skills:
+  - file: artsy-bootstrap-and-browse.md
+    name: Bootstrap an Artsy token and browse the catalog
+    api: openapi/artsy-public-api-openapi.yml
+    operations: [postApiTokensXappToken, getApiArtists, getApiArtworks, getApiStatus]
+  - file: artsy-artist-to-artworks.md
+    name: Walk an artist to their artworks, genes and editions
+    api: openapi/artsy-public-api-openapi.yml
+    operations: [getApiArtistsId, getApiArtworks, getApiGenes, getApiEditions, getApiImages, getApiArtists]
+  - file: artsy-auctions-and-lots.md
+    name: Read Artsy auctions, lots and bidding state
+    api: openapi/artsy-public-api-openapi.yml
+    operations: [getApiSales, getApiSalesId, getApiSaleArtworks, getApiSaleArtworksId, getApiBidders, getApiBiddersId, getApiBidderPositionsId, getApiLotStandings]
+  - file: artsy-manage-client-application.md
+    name: Manage an Artsy client application and its tokens
+    api: openapi/artsy-public-api-openapi.yml
+    operations: [getApiApplications, postApiApplications, getApiApplicationsId, putApiApplicationsId, deleteApiApplicationsId, getApiTokens, postApiTokensXappToken, deleteApiTokensAccessToken, getApiDevices, getApiDevicesId, deleteApiDevicesId, getApiCurrentUser]
+  - file: artsy-search-shows-and-partners.md
+    name: Search Artsy and browse shows, fairs and partners
+    api: openapi/artsy-public-api-openapi.yml
+    operations: [getApiSearch, getApiShows, getApiShowsId, getApiFairs, getApiFairsId, getApiPartners, getApiPartnersId, getApiProfiles, getApiProfilesId, getApiArtworks]

@@ -41,8 +41,13 @@ tags:
   - Artists
   - Collectors
   - Galleries
+  - Auctions
+  - Museums
+  - Art Market
+  - Culture
+  - Images
 created: '2025-02-24'
-modified: '2026-04-19'
+modified: '2026-09-07'
 specificationVersion: '0.23'
 url: >-
   https://raw.githubusercontent.com/api-evangelist/artsy/refs/heads/main/apis.yml
@@ -70,7 +75,52 @@ apis:
         url: https://developers.artsy.net/v2/docs/authentication
       - type: Authentication
         url: https://developers.artsy.net/v2/docs/authentication
+      - type: OpenAPI
+        url: openapi/artsy-public-api-openapi.yml
+      - type: APIReference
+        url: https://developers.artsy.net/v2
+        title: Artsy Public API Reference (v2)
+      - type: TermsOfService
+        url: https://developers.artsy.net/v2/terms
+        title: Artsy Public API Terms of Use
+      - type: Console
+        url: https://developers.artsy.net/v2/playground
+        title: API Playground (Artsy login required)
+  - aid: artsy:metaphysics
+    name: Artsy Metaphysics GraphQL API
+    description: >-
+      Metaphysics is Artsy's public GraphQL gateway — the contract that actually powers artsy.net and
+      the Artsy iOS and Android apps. It wraps Artsy's internal services (Gravity, Exchange,
+      Convection) behind a single Relay-compatible schema of 1,478 object types, 165 Query root fields
+      and 306 mutations, covering commerce and offers, editorial, viewing rooms, price and auction
+      insights, consignment submissions, conversations and personalized discovery — none of which the
+      retiring REST Public API exposes. Runtime introspection is disabled; Artsy publishes the schema
+      instead as _schemaV2.graphql in the open-source metaphysics repository. Most fields require a
+      user access token obtained through the same OAuth 2 endpoints as the REST API.
+    humanURL: https://github.com/artsy/metaphysics
+    baseURL: https://metaphysics-production.artsy.net/v2
+    tags:
+      - GraphQL
+      - Art
+      - Commerce
+      - Auctions
+      - Editorial
+    properties:
+      - type: GraphQL
+        url: graphql/artsy-metaphysics.graphql
+      - type: GraphQLSchema
+        url: graphql/artsy-metaphysics.graphql
+      - type: SourceCode
+        url: https://github.com/artsy/metaphysics
+      - type: Documentation
+        url: https://github.com/artsy/metaphysics/blob/main/README.md
+      - type: ToolCrosswalk
+        url: mcp/artsy-tool-crosswalk.yml
 common:
+  - type: AgenticAccess
+    url: agentic-access/artsy-agentic-access.yml
+  - type: Website
+    url: https://www.artsy.net/
   - type: DomainSecurity
     url: security/artsy-domain-security.yml
   - type: LinkedIn
@@ -142,6 +192,71 @@ common:
           Gallery and auction house partners integrate directly with Artsy
           through the Partner API for full marketplace integration including
           artwork listings and collector communications.
+  - type: APIReference
+    url: https://developers.artsy.net/v2
+    title: Public API Reference
+  - type: GettingStarted
+    url: https://developers.artsy.net/v2/docs/authentication
+    title: Getting Started — obtain credentials and mint a token
+  - type: Support
+    url: https://support.artsy.net/
+    title: Artsy Help Center
+  - type: TermsOfService
+    url: https://www.artsy.net/terms
+    title: Terms and Conditions
+  - type: PrivacyPolicy
+    url: https://www.artsy.net/privacy
+    title: Privacy Policy
+  - type: Security
+    url: https://www.artsy.net/security
+    title: Artsy Security
+  - type: StatusPage
+    url: https://status.artsy.net/
+    title: Artsy Status
+  - type: Deprecation
+    url: https://developers.artsy.net/
+    title: Public API retirement notice
+  - type: Authentication
+    url: authentication/artsy-authentication.yml
+  - type: OAuthScopes
+    url: scopes/artsy-scopes.yml
+  - type: Conventions
+    url: conventions/artsy-conventions.yml
+  - type: ErrorCatalog
+    url: errors/artsy-problem-types.yml
+  - type: Lifecycle
+    url: lifecycle/artsy-lifecycle.yml
+  - type: Conformance
+    url: conformance/artsy-conformance.yml
+  - type: DataModel
+    url: data-model/artsy-data-model.yml
+  - type: Packages
+    url: packages/artsy-packages.yml
+  - type: SDKs
+    url: packages/artsy-packages.yml
+    title: First-party client libraries
+  - type: Sandbox
+    url: sandbox/artsy-sandbox.yml
+    title: Staging environment and playground
+  - type: RateLimits
+    url: rate-limits/artsy-rate-limits.yml
+  - type: Plans
+    url: plans/artsy-plans-pricing.yml
+  - type: Overlay
+    url: overlays/artsy-public-api-overlay.yaml
+  - type: LLMsTxt
+    url: llms/artsy-llms.txt
+  - type: AgentSkill
+    url: skills/_index.yml
+  - type: X-MCPServerCandidate
+    url: mcp/artsy-mcp.yml
+  - type: VulnerabilityDisclosure
+    url: security/artsy-vulnerability-disclosure.yml
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-enrichment:
+  date: '2026-09-07'
+  status: enriched
+  artifacts_added: 25
+  pass: local-v3

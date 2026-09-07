@@ -1,0 +1,184 @@
+generated: '2026-09-07'
+method: searched
+source: >-
+  https://developers.artsy.net/v2/docs/http, https://developers.artsy.net/v2/docs/pagination,
+  https://developers.artsy.net/v2/docs/links, https://developers.artsy.net/v2/docs/errors,
+  https://developers.artsy.net/v2/docs/rate_limiting
+note: >-
+  Artsy publishes a genuinely hypermedia-first contract: JSON+HAL everywhere, a link-relation index at
+  the API root, templated links, and cursor pagination. The conventions below are read from the five
+  provider documentation pages named above and cross-checked against the harvested Swagger 2.0 and a
+  live 200 fetch of https://api.artsy.net/api/ (50 link relations).
+media_type:
+  request: [application/json, application/x-www-form-urlencoded]
+  response: [application/hal+json, application/json]
+  note: >-
+    A request with any other Content-Type on POST or PUT fails with 406 Not Acceptable and a JSON
+    error body. Stated verbatim on the HTTP page.
+hypermedia:
+  style: JSON+HAL
+  entry_point: https://api.artsy.net/api/
+  link_container: _links
+  self_relation: every top-level resource carries a "self" link
+  collection_container: _embedded
+  templated_links: true
+  templated_marker: '"templated": true'
+  link_relations_observed: 50
+  note: >-
+    The provider documents discoverability as the intended navigation model — a client should walk from
+    the root rather than construct URLs. Link rels are themselves URLs that resolve to documentation.
+authentication:
+  style: token-in-header
+  headers: [X-Xapp-Token, X-Auth-Token]
+  detail: authentication/artsy-authentication.yml
+pagination:
+  style: cursor
+  fallback_style: offset
+  params:
+    - {name: cursor, description: A position within the results set}
+    - {name: offset, description: Skip this number of items; mutually exclusive with cursor}
+    - {name: size, description: Limit the number of embedded items in the response}
+    - {name: total_count, description: Set to 1 to have the API compute and return total_count}
+    - {name: sample, description: Redirect to the canonical URL for a random element in the collection}
+  response_fields: [total_count, _links.self, _links.next, _embedded]
+  next_page_signal: _links.next — absent on the last page
+  mutual_exclusion:
+    fields: [cursor, offset]
+    behavior: an explicit 400 when both are supplied
+  total_count_semantics: >-
+    total_count is never computed by default because counting is not free; it must be requested with
+    total_count=1, and the provider warns it is an estimate that can drift between calls.
+  docs: https://developers.artsy.net/v2/docs/pagination
+field_expansion:
+  supported: false
+  note: >-
+    No expand/fields/sparse-fieldset parameter is documented. Related resources are reached by
+    following HAL link relations instead of expanding them inline.
+metadata:
+  supported: false
+  note: No customer-defined metadata field is documented on any resource.
+request_tracing:
+  request_id_header: null
+  note: >-
+    No request-id or correlation header is documented, and none was observed on a live anonymous
+    response. An agent has no provider-issued handle to quote in a support request.
+timestamps:
+  fields: [created_at, updated_at]
+  format: ISO 8601 UTC, without millisecond precision
+identifiers:
+  rest: >-
+    Resources carry an "id" (24-character hex, MongoDB ObjectId shaped, e.g. 4d8b92b34eb68a1b2c0003f4).
+    Most REST paths also accept a human-readable slug in place of the id.
+  graphql: >-
+    Metaphysics deliberately inverts this: an "id" field is a Relay global identifier with NO
+    relationship to a database id, and the database identifier is exposed as "internalID". Field
+    ARGUMENTS still take a slug or an internalID. Stated by Artsy in
+    https://github.com/artsy/metaphysics/blob/main/AGENTS.md — this is the single most common way an
+    agent writing an Artsy GraphQL query gets it wrong.
+versioning:
+  scheme: uri-path
+  current: v2
+  previous: v1
+  detail: lifecycle/artsy-lifecycle.yml
+error_envelope:
+  shape: bespoke-json
+  format: not rfc9457
+  fields:
+    - {name: type, description: 'Error type: auth_error | param_error | other_error'}
+    - {name: message, description: Human-readable error message}
+    - {name: detail, description: Additional per-field detail, present on param_error}
+  oauth_shape:
+    fields: [error, error_description]
+    note: The /oauth2/* endpoints use the OAuth 2 error shape, not the API error shape.
+  detail: errors/artsy-problem-types.yml
+rate_limit_signaling:
+  documented_headers: []
+  status_on_exhaustion: 429
+  note: >-
+    The provider publishes the limit (5 requests/second per client application ID) but documents NO
+    response headers. An agent cannot read remaining budget or a reset time from a response; it can
+    only observe the 429. See rate-limits/artsy-rate-limits.yml.
+  detail: rate-limits/artsy-rate-limits.yml
+idempotency:
+  supported: false
+  coverage: none
+  mechanism: null
+  header: null
+  scope: []
+  note: >-
+    No idempotency key, no request-deduplication window, and no replay-safety statement appears
+    anywhere in the Artsy Public API documentation or in the harvested Swagger. The mutating surface is
+    six operations (create/update/delete an application, delete a device, create an XAPP token, revoke
+    an access token); a retried POST /api/applications creates a second application. No Idempotency
+    pointer is emitted for this provider.
+reversibility:
+  grade: documented
+  note: >-
+    Every write on this API has a documented inverse operation, and NOT ONE of them carries a stated
+    window. Grade is "documented" (reversal path present) rather than "verified" (reversal path plus a
+    stated window) for exactly that reason. No window is asserted below that the provider does not
+    state — and the provider states none.
+  surfaces:
+    - write: postApiApplications
+      description: Create a client application
+      reversal: deleteApiApplicationsId
+      reversal_kind: delete
+      window: null
+      window_documented: false
+      docs: https://developers.artsy.net/v2/docs/applications
+    - write: putApiApplicationsId
+      description: Update a client application
+      reversal: putApiApplicationsId
+      reversal_kind: re-update
+      window: null
+      window_documented: false
+      note: >-
+        Update is reversible only by writing the previous value back. The API returns no prior-version
+        record, so the caller must have retained it.
+      docs: https://developers.artsy.net/v2/docs/applications
+    - write: deleteApiApplicationsId
+      description: Delete a client application
+      reversal: null
+      reversal_kind: none
+      window: null
+      window_documented: false
+      note: >-
+        No restore, undelete or trash operation is documented. Treat as irreversible; the client_id and
+        client_secret are lost with it.
+      docs: https://developers.artsy.net/v2/docs/applications
+    - write: postApiTokensXappToken
+      description: Mint an XAPP token
+      reversal: null
+      reversal_kind: expiry
+      window: null
+      window_documented: false
+      note: >-
+        No revoke operation exists for XAPP tokens; they lapse at the expires_at the response carries.
+        The response states the expiry per token, but no policy window is published.
+      docs: https://developers.artsy.net/v2/docs/authentication
+    - write: deleteApiTokensAccessToken
+      description: Revoke a user access token (logout)
+      reversal: re-authenticate via /oauth2/access_token
+      reversal_kind: re-issue
+      window: null
+      window_documented: false
+      docs: https://developers.artsy.net/v2/docs/authentication
+    - write: deleteApiDevicesId
+      description: Deregister a push device
+      reversal: null
+      reversal_kind: re-register
+      window: null
+      window_documented: false
+      docs: https://developers.artsy.net/v2/docs/docs
+dry_run_mode:
+  supported: false
+  note: >-
+    No dry-run, preview or validate-only parameter is documented. The nearest equivalent is the full
+    staging environment at https://stagingapi.artsy.net/api — a separate deployment, not a per-request
+    rehearsal mode. See sandbox/artsy-sandbox.yml.
+cross_links:
+  authentication: authentication/artsy-authentication.yml
+  errors: errors/artsy-problem-types.yml
+  lifecycle: lifecycle/artsy-lifecycle.yml
+  rate_limits: rate-limits/artsy-rate-limits.yml
+  sandbox: sandbox/artsy-sandbox.yml

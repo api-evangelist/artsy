@@ -1,0 +1,119 @@
+generated: '2026-09-07'
+method: probed
+source: live HTTPS probe of the named /.well-known/ path list on every host this record knows
+note: >-
+  Every named path was probed on six Artsy hosts and every one missed. A negative-control path that
+  cannot exist was probed on each host and returned the same status as the real paths, so no host on
+  this domain is a path-echoing or SPA catch-all responder. NO WellKnown or SecurityTxt pointer is
+  emitted from this file: it documents an absence, not a presence. The apex artsy.net returns
+  Cloudflare 530 (origin unreachable for that path class) rather than 404 — recorded as observed.
+path_echo_control: passed
+hit_count: 0
+hosts:
+  - host: https://artsy.net
+    documents:
+      - {path: /.well-known/security.txt, status: 530, file: null}
+      - {path: /.well-known/openid-configuration, status: 530, file: null}
+      - {path: /.well-known/oauth-authorization-server, status: 530, file: null}
+      - {path: /.well-known/oauth-protected-resource, status: 530, file: null}
+      - {path: /.well-known/api-catalog, status: 530, file: null}
+      - {path: /.well-known/ai-plugin.json, status: 530, file: null}
+      - {path: /.well-known/apis.json, status: 530, file: null}
+      - {path: /apis.json, status: 403, file: null}
+      - {path: /apis.yml, status: 403, file: null}
+      - {path: /.well-known/agent-card.json, status: 530, file: null}
+      - {path: /.well-known/agent.json, status: 530, file: null}
+      - {path: /.well-known/aauth-resource.json, status: 530, file: null}
+      - {path: /.well-known/ucp.json, status: 530, file: null}
+      - {path: /.well-known/acp.json, status: 530, file: null}
+      - {path: /.well-known/artsy-negative-control-7f3ab91c.json, status: 530, file: null}
+  - host: https://www.artsy.net
+    documents:
+      - {path: /.well-known/security.txt, status: 404, file: null}
+      - {path: /.well-known/openid-configuration, status: 404, file: null}
+      - {path: /.well-known/oauth-authorization-server, status: 404, file: null}
+      - {path: /.well-known/oauth-protected-resource, status: 404, file: null}
+      - {path: /.well-known/api-catalog, status: 404, file: null}
+      - {path: /.well-known/ai-plugin.json, status: 404, file: null}
+      - {path: /.well-known/apis.json, status: 404, file: null}
+      - {path: /apis.json, status: 403, file: null}
+      - {path: /apis.yml, status: 403, file: null}
+      - {path: /.well-known/agent-card.json, status: 404, file: null}
+      - {path: /.well-known/agent.json, status: 404, file: null}
+      - {path: /.well-known/aauth-resource.json, status: 404, file: null}
+      - {path: /.well-known/ucp.json, status: 404, file: null}
+      - {path: /.well-known/acp.json, status: 404, file: null}
+      - {path: /.well-known/artsy-negative-control-7f3ab91c.json, status: 404, file: null}
+  - host: https://api.artsy.net
+    documents:
+      - {path: /.well-known/security.txt, status: 404, file: null}
+      - {path: /.well-known/openid-configuration, status: 404, file: null}
+      - {path: /.well-known/oauth-authorization-server, status: 404, file: null}
+      - {path: /.well-known/oauth-protected-resource, status: 404, file: null}
+      - {path: /.well-known/api-catalog, status: 404, file: null}
+      - {path: /.well-known/ai-plugin.json, status: 404, file: null}
+      - {path: /.well-known/apis.json, status: 404, file: null}
+      - {path: /apis.json, status: 404, file: null}
+      - {path: /apis.yml, status: 404, file: null}
+      - {path: /.well-known/agent-card.json, status: 404, file: null}
+      - {path: /.well-known/agent.json, status: 404, file: null}
+      - {path: /.well-known/aauth-resource.json, status: 404, file: null}
+      - {path: /.well-known/ucp.json, status: 404, file: null}
+      - {path: /.well-known/acp.json, status: 404, file: null}
+      - {path: /.well-known/artsy-negative-control-7f3ab91c.json, status: 404, file: null}
+  - host: https://developers.artsy.net
+    documents:
+      - {path: /.well-known/security.txt, status: 404, file: null}
+      - {path: /.well-known/openid-configuration, status: 404, file: null}
+      - {path: /.well-known/oauth-authorization-server, status: 404, file: null}
+      - {path: /.well-known/oauth-protected-resource, status: 404, file: null}
+      - {path: /.well-known/api-catalog, status: 404, file: null}
+      - {path: /.well-known/ai-plugin.json, status: 404, file: null}
+      - {path: /.well-known/apis.json, status: 404, file: null}
+      - {path: /apis.json, status: 404, file: null}
+      - {path: /apis.yml, status: 404, file: null}
+      - {path: /.well-known/agent-card.json, status: 404, file: null}
+      - {path: /.well-known/agent.json, status: 404, file: null}
+      - {path: /.well-known/aauth-resource.json, status: 404, file: null}
+      - {path: /.well-known/ucp.json, status: 404, file: null}
+      - {path: /.well-known/acp.json, status: 404, file: null}
+      - {path: /.well-known/artsy-negative-control-7f3ab91c.json, status: 404, file: null}
+  - host: https://metaphysics-production.artsy.net
+    documents:
+      - {path: /.well-known/security.txt, status: 404, file: null}
+      - {path: /.well-known/openid-configuration, status: 404, file: null}
+      - {path: /.well-known/oauth-authorization-server, status: 404, file: null}
+      - {path: /.well-known/oauth-protected-resource, status: 404, file: null}
+      - {path: /.well-known/api-catalog, status: 404, file: null}
+      - {path: /.well-known/ai-plugin.json, status: 404, file: null}
+      - {path: /.well-known/apis.json, status: 404, file: null}
+      - {path: /apis.json, status: 404, file: null}
+      - {path: /apis.yml, status: 404, file: null}
+      - {path: /.well-known/agent-card.json, status: 404, file: null}
+      - {path: /.well-known/agent.json, status: 404, file: null}
+      - {path: /.well-known/aauth-resource.json, status: 404, file: null}
+      - {path: /.well-known/ucp.json, status: 404, file: null}
+      - {path: /.well-known/acp.json, status: 404, file: null}
+      - {path: /.well-known/artsy-negative-control-7f3ab91c.json, status: 404, file: null}
+  - host: https://artsy.github.io
+    documents:
+      - {path: /.well-known/security.txt, status: 404, file: null}
+      - {path: /.well-known/openid-configuration, status: 404, file: null}
+      - {path: /.well-known/oauth-authorization-server, status: 404, file: null}
+      - {path: /.well-known/oauth-protected-resource, status: 404, file: null}
+      - {path: /.well-known/api-catalog, status: 404, file: null}
+      - {path: /.well-known/ai-plugin.json, status: 404, file: null}
+      - {path: /.well-known/apis.json, status: 404, file: null}
+      - {path: /apis.json, status: 404, file: null}
+      - {path: /apis.yml, status: 404, file: null}
+      - {path: /.well-known/agent-card.json, status: 404, file: null}
+      - {path: /.well-known/agent.json, status: 404, file: null}
+      - {path: /.well-known/aauth-resource.json, status: 404, file: null}
+      - {path: /.well-known/ucp.json, status: 404, file: null}
+      - {path: /.well-known/acp.json, status: 404, file: null}
+      - {path: /.well-known/artsy-negative-control-7f3ab91c.json, status: 404, file: null}
+a2a_probe:
+  result: miss
+  note: >-
+    No agent card at /.well-known/agent-card.json or the legacy /.well-known/agent.json on any of the
+    six hosts. Per the pipeline contract no a2a/ artifact is written and no AgentCard pointer is emitted.

@@ -1,0 +1,67 @@
+generated: '2026-09-07'
+method: searched
+source: https://developers.artsy.net/
+note: >-
+  Artsy has publicly announced that the Public API is being retired. The banner below appears at the
+  top of EVERY page of developers.artsy.net, including the API reference and every convention page, and
+  is quoted verbatim. This is a live deprecation notice with no dated sunset — the strongest signal
+  this record carries and the reason the lifecycle grade is honest rather than generous.
+versioning:
+  scheme: uri-path
+  current: v2
+  previous: v1
+  v1_docs: https://developers.artsy.net/v1
+  v2_docs: https://developers.artsy.net/v2
+  docs: https://developers.artsy.net/v2/docs/http
+deprecation:
+  status: announced-retirement
+  scope: the Artsy Public API, its documentation, and its playground
+  policy_url: https://developers.artsy.net/
+  announcement: >-
+    "Please note, we are in the process of retiring the public api. The public api, as well as its
+    documentation and playground, may be taken down at any time without additional notice. This change
+    will not affect integration partners using our partner api. If you're an Artsy partner gallery,
+    reach out to your Artsy Liaison or contact our Support team for assistance."
+  sunset_date: null
+  notice_period: none — the provider explicitly reserves the right to take it down without further notice
+  sunset_header: false
+  deprecation_header: false
+  rfc8594: false
+  migration_path: >-
+    The Partner API, which is not publicly documented and is obtained through an Artsy Liaison or
+    Support. Galleries and auction houses are directed there; there is no announced public successor
+    for non-partner consumers.
+  implication_for_agents: >-
+    Any agent building against api.artsy.net should treat every endpoint as end-of-life. The
+    replacement surface is sales-gated, so this is not a migration an agent can perform unattended.
+deprecated_operations: []
+deprecated_operations_note: >-
+  No operation carries deprecated: true in the harvested Swagger. The retirement is announced at the
+  API level in prose only; it is not expressed anywhere in the machine-readable contract, so a client
+  generated from the spec sees no warning at all.
+sla:
+  url: null
+  uptime_target: null
+  note: No SLA or uptime commitment is published for the Public API.
+status_page: https://status.artsy.net/
+status_page_detail:
+  provider: Atlassian Statuspage
+  page_id: hmhlbjlmdhgh
+  api: https://status.artsy.net/api/v2/status.json
+  observed: '2026-09-07 — HTTP 200, indicator "none", description "All Systems Operational"'
+  method: probed
+broken_first_party_links:
+  - url: https://developers.artsy.net/v2/start
+    status: 404
+    referenced_from: https://developers.artsy.net/v2/docs/authentication
+    detail: >-
+      The authentication page tells a new developer to "create an application and obtain a client ID and
+      secret by following the instructions in Getting Started" and links /v2/start, which 404s. The
+      documented onboarding path is broken on the provider's own site — consistent with an API in
+      announced retirement. The live equivalents are https://developers.artsy.net/v2/docs/authentication
+      (the flow itself) and https://developers.artsy.net/client_applications (the registration console).
+    checked: '2026-09-07'
+support:
+  mailing_list: artsy-api-developers@googlegroups.com
+  help: https://developers.artsy.net/help
+  partner_support: https://support.artsy.net/

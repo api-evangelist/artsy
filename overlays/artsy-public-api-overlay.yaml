@@ -1,0 +1,108 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the Artsy Public API
+  version: 1.0.0
+extends: openapi/artsy-public-api-openapi.yml
+x-generated: '2026-09-07'
+x-method: generated
+x-source: >-
+  Derived from the harvested contract at https://api.artsy.net/api/docs/ plus the provider's own
+  documentation at developers.artsy.net. This overlay records OUR annotations; the harvested spec at
+  openapi/_original/artsy-public-api-swagger-original.json is never mutated.
+actions:
+  - target: $.info
+    description: Stamp provenance and the retirement notice the contract itself does not carry.
+    update:
+      x-apievangelist-provenance:
+        harvested_from: https://api.artsy.net/api/docs/
+        harvested: '2026-09-07'
+        http_status: 200
+        content_type: application/json
+      x-lifecycle-status: announced-retirement
+      x-lifecycle-note: >-
+        Artsy states on every page of developers.artsy.net that the Public API, its documentation and
+        its playground are being retired and may be taken down at any time without additional notice.
+        The contract carries no Sunset header, no deprecation flag and no dated sunset.
+      x-lifecycle-source: https://developers.artsy.net/
+  - target: $
+    description: >-
+      Declare the security the API actually requires. The published contract has NO securityDefinitions
+      at all, yet every operation other than the token endpoints requires a token header.
+    update:
+      securityDefinitions:
+        XappToken:
+          type: apiKey
+          in: header
+          name: X-Xapp-Token
+          description: >-
+            Anonymous application token from POST /api/tokens/xapp_token. Documented at
+            https://developers.artsy.net/v2/docs/authentication.
+        UserAccessToken:
+          type: apiKey
+          in: header
+          name: X-Auth-Token
+          description: >-
+            User-scoped token from POST https://api.artsy.net/oauth2/access_token. Documented at
+            https://developers.artsy.net/v2/docs/authentication.
+      schemes: [https]
+  - target: $
+    description: >-
+      Record the environments. The contract names host api.artsy.net only; the provider documents a
+      full staging deployment at stagingapi.artsy.net.
+    update:
+      x-environments:
+        - {name: production, host: api.artsy.net, base: https://api.artsy.net/api}
+        - {name: staging, host: stagingapi.artsy.net, base: https://stagingapi.artsy.net/api,
+           note: 'rebuilt nightly ~5:30AM EST from production data; cannot send e-mail'}
+  - target: $
+    description: >-
+      Record the cross-cutting runtime semantics the contract omits: rate limit, error envelope,
+      pagination and media type. Every value is stated by the provider in documentation.
+    update:
+      x-rate-limit:
+        limit: 5
+        window: second
+        scope: per client application ID
+        status_on_exhaustion: 429
+        response_headers: none published
+        source: https://developers.artsy.net/v2/docs/rate_limiting
+      x-error-envelope:
+        content_type: application/json
+        fields: [type, message, detail]
+        types: [auth_error, param_error, other_error]
+        rfc9457: false
+        caveat: >-
+          A 401 may be returned with the reason phrase "401 Broadway" instead of "401 Unauthorized" —
+          a documented easter egg. Clients must branch on the numeric status, never the reason phrase.
+        source: https://developers.artsy.net/v2/docs/errors
+      x-pagination:
+        style: cursor
+        params: [cursor, offset, size, total_count, sample]
+        response: [total_count, _links.next, _embedded]
+        mutually_exclusive: [cursor, offset]
+        source: https://developers.artsy.net/v2/docs/pagination
+      x-hypermedia:
+        format: JSON+HAL
+        entry_point: https://api.artsy.net/api/
+        link_relations: 50
+      x-idempotency:
+        supported: false
+        coverage: none
+  - target: $.paths['/api/artworks'].get
+    description: Annotate the marquee read operation with the filters the HAL root advertises.
+    update:
+      x-apievangelist-filters: [artist_id, partner_id, show_id, similar_to_artwork_id, published, term]
+  - target: $.paths['/api/tokens/xapp_token'].post
+    description: Flag the bootstrap operation every other call depends on.
+    update:
+      x-apievangelist-role: bootstrap
+      x-apievangelist-note: >-
+        Call this first. The returned token goes in the X-Xapp-Token header on every subsequent
+        request; the response carries expires_at.
+  - target: $.paths['/api/applications'].post
+    description: Flag the write surface as non-idempotent.
+    update:
+      x-idempotent: false
+      x-apievangelist-note: >-
+        No Idempotency-Key is supported. A retried POST creates a second application. The inverse is
+        DELETE /api/applications/{id}; no restore exists and no window is published.

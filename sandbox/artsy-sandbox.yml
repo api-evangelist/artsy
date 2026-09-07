@@ -1,0 +1,54 @@
+generated: '2026-09-07'
+method: searched
+source: https://developers.artsy.net/v2/docs/http
+probed: '2026-09-07'
+note: >-
+  Artsy runs a full separate staging deployment rather than a test-mode flag on the production key. The
+  staging root was fetched live and returned HTTP 200 with a HAL index whose self link is
+  https://stagingapi.artsy.net/api/ — a real, reachable, anonymously-discoverable environment.
+environments:
+  - name: production
+    base_url: https://api.artsy.net/api
+    mode: live
+  - name: staging
+    base_url: https://stagingapi.artsy.net/api
+    mode: test
+    docs_url: https://stagingapi.artsy.net/api/docs/
+    observed:
+      url: https://stagingapi.artsy.net/api
+      http_status: 200
+      content_type: application/json
+      fetched: '2026-09-07'
+    caveats:
+      - Can only take moderate traffic and does not have 100% uptime (stated by the provider).
+      - >-
+        Rebuilt nightly around 5:30AM EST from a large amount of production data. Anything created in
+        staging the day before — including client applications — will likely be destroyed within
+        24 hours.
+      - Staging cannot send e-mails.
+    note: >-
+      Because staging is rebuilt from production data nightly, a client application registered there is
+      NOT durable. An agent must re-register credentials against staging on each cycle.
+key_separation:
+  mechanism: separate-host
+  test_key_prefix: null
+  live_key_prefix: null
+  note: >-
+    There is no test/live key prefix. Credentials are per environment: register a client application on
+    the environment you intend to call. Token endpoints exist on both hosts
+    (POST /api/tokens/xapp_token).
+console:
+  url: https://developers.artsy.net/v2/playground
+  gated: true
+  gate: Artsy account login ("Log in via Artsy")
+  status: >-
+    HTTP 200, but the page renders an auth shell only. The provider's retirement banner names the
+    playground explicitly as something that may be taken down without notice.
+magic_test_values:
+  published: false
+  note: >-
+    No test card numbers, magic identifiers, fixture triggers or time-simulation tooling are published.
+    This is a read-mostly catalog API with no payment surface, so there is nothing of that shape to
+    capture. Nothing has been invented to fill the slot.
+test_clocks:
+  supported: false

@@ -1,0 +1,33 @@
+generated: '2026-09-07'
+method: searched
+source: https://developers.artsy.net/v2/docs/authentication
+docs: https://developers.artsy.net/v2/docs/authentication
+note: >-
+  derive-oauth-scopes.py found no oauth2 securityScheme because the harvested Swagger 2.0 declares no
+  security at all. Artsy nevertheless runs a real OAuth 2 authorization server (/oauth2/authorize,
+  /oauth2/access_token) and its documentation names exactly ONE scope value. There is no scopes or
+  permissions reference page — the scope surface is genuinely this small, not merely undiscovered.
+schemes:
+  - name: OAuth2
+    source: https://developers.artsy.net/v2/docs/authentication
+    flows:
+      - flow: authorizationCode
+        authorizationUrl: https://api.artsy.net/oauth2/authorize
+        tokenUrl: https://api.artsy.net/oauth2/access_token
+      - flow: password
+        tokenUrl: https://api.artsy.net/oauth2/access_token
+      - flow: token-exchange
+        tokenUrl: https://api.artsy.net/oauth2/access_token
+scopes:
+  - scope: offline_access
+    description: >-
+      Requests a long-lived token that expires in 25 years instead of the standard 60 days. Passed as
+      the optional "scope" parameter on any of the three /oauth2/access_token grants and echoed back
+      on the token response.
+    flows: [authorizationCode, password, token-exchange]
+    sources: [https://developers.artsy.net/v2/docs/authentication]
+scope_count: 1
+missing:
+  - >-
+    No per-resource scopes are published. Access to write operations (applications, devices, tokens)
+    and to user-bound collections is governed by which token you hold, not by a scope grant.

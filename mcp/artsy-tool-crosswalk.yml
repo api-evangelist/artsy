@@ -1,0 +1,624 @@
+generated: '2026-09-07'
+method: derived
+source: openapi/artsy-public-api-openapi.yml, graphql/artsy-metaphysics.graphql, mcp/artsy-mcp.yml
+note: Artsy runs TWO overlapping-but-very-unequal contracts. The Swagger 2.0 Public API carries 53 operations
+  across the reference catalog (artists, artworks, genes, shows, fairs, sales) and is announced for retirement.
+  Metaphysics, the GraphQL gateway, carries 165 Query root fields and 306 mutations covering commerce,
+  editorial, viewing rooms, price insights, consignments and personalization — none of which the REST
+  contract exposes. There is no MCP server, so the crosswalk binds DERIVED candidate tools; every REST
+  binding is exact because each candidate tool is one operation. The GraphQL side is mapped by root-field
+  name read from the published SDL, never invented.
+surfaces:
+  openapi:
+    file: openapi/artsy-public-api-openapi.yml
+    source: https://api.artsy.net/api/docs/
+    spec: Swagger 2.0
+    operations: 53
+    gated: false
+  graphql:
+    endpoint: https://metaphysics-production.artsy.net/v2
+    sdl: graphql/artsy-metaphysics.graphql
+    source: https://github.com/artsy/metaphysics/blob/main/_schemaV2.graphql
+    introspection: disabled at runtime — a live POST of {__schema{queryType{name}}} returns "GraphQL introspection
+      has been disabled". The SDL was harvested from the provider's own repository instead.
+    query_root_fields: 165
+    mutations: 306
+    gated: partially — most fields require a user token
+  mcp:
+    url: null
+    status: none published
+    gated: null
+crosswalk:
+- tool: list_applications
+  category: applications
+  rest:
+  - getApiApplications
+  binding: rest
+  confidence: high
+  note: 'Derived candidate tool: it IS the operation, so the binding is exact and the tool inherits that
+    operation''s parameters verbatim.'
+- tool: create_applications
+  category: applications
+  rest:
+  - postApiApplications
+  binding: rest
+  confidence: high
+  note: 'Derived candidate tool: it IS the operation, so the binding is exact and the tool inherits that
+    operation''s parameters verbatim.'
+- tool: get_applications
+  category: applications
+  rest:
+  - getApiApplicationsId
+  binding: rest
+  confidence: high
+  note: 'Derived candidate tool: it IS the operation, so the binding is exact and the tool inherits that
+    operation''s parameters verbatim.'
+- tool: update_applications
+  category: applications
+  rest:
+  - putApiApplicationsId
+  binding: rest
+  confidence: high
+  note: 'Derived candidate tool: it IS the operation, so the binding is exact and the tool inherits that
+    operation''s parameters verbatim.'
+- tool: delete_applications
+  category: applications
+  rest:
+  - deleteApiApplicationsId
+  binding: rest
+  confidence: high
+  note: 'Derived candidate tool: it IS the operation, so the binding is exact and the tool inherits that
+    operation''s parameters verbatim.'
+- tool: list_artists
+  category: artists
+  rest:
+  - getApiArtists
+  binding: rest
+  confidence: high
+  note: 'Derived candidate tool: it IS the operation, so the binding is exact and the tool inherits that
+    operation''s parameters verbatim.'
+- tool: get_artists
+  category: artists
+  rest:
+  - getApiArtistsId
+  binding: rest
+  confidence: high
+  note: 'Derived candidate tool: it IS the operation, so the binding is exact and the tool inherits that
+    operation''s parameters verbatim.'
+- tool: list_artworks
+  category: artworks
+  rest:
+  - getApiArtworks
+  binding: rest
+  confidence: high
+  note: 'Derived candidate tool: it IS the operation, so the binding is exact and the tool inherits that
+    operation''s parameters verbatim.'
+- tool: get_artworks
+  category: artworks
+  rest:
+  - getApiArtworksId
+  binding: rest
+  confidence: high
+  note: 'Derived candidate tool: it IS the operation, so the binding is exact and the tool inherits that
+    operation''s parameters verbatim.'
+- tool: get_bidder_positions
+  category: bidder_positions
+  rest:
+  - getApiBidderPositionsId
+  binding: rest
+  confidence: high
+  note: 'Derived candidate tool: it IS the operation, so the binding is exact and the tool inherits that
+    operation''s parameters verbatim.'
+- tool: list_bidders
+  category: bidders
+  rest:
+  - getApiBidders
+  binding: rest
+  confidence: high
+  note: 'Derived candidate tool: it IS the operation, so the binding is exact and the tool inherits that
+    operation''s parameters verbatim.'
+- tool: get_bidders
+  category: bidders
+  rest:
+  - getApiBiddersId
+  binding: rest
+  confidence: high
+  note: 'Derived candidate tool: it IS the operation, so the binding is exact and the tool inherits that
+    operation''s parameters verbatim.'
+- tool: list_collection_items
+  category: collection_items
+  rest:
+  - getApiCollectionItems
+  binding: rest
+  confidence: high
+  note: 'Derived candidate tool: it IS the operation, so the binding is exact and the tool inherits that
+    operation''s parameters verbatim.'
+- tool: get_collection_items
+  category: collection_items
+  rest:
+  - getApiCollectionItemsId
+  binding: rest
+  confidence: high
+  note: 'Derived candidate tool: it IS the operation, so the binding is exact and the tool inherits that
+    operation''s parameters verbatim.'
+- tool: list_collector_profiles
+  category: collector_profiles
+  rest:
+  - getApiCollectorProfiles
+  binding: rest
+  confidence: high
+  note: 'Derived candidate tool: it IS the operation, so the binding is exact and the tool inherits that
+    operation''s parameters verbatim.'
+- tool: get_collector_profiles
+  category: collector_profiles
+  rest:
+  - getApiCollectorProfilesId
+  binding: rest
+  confidence: high
+  note: 'Derived candidate tool: it IS the operation, so the binding is exact and the tool inherits that
+    operation''s parameters verbatim.'
+- tool: list_current_user
+  category: current_user
+  rest:
+  - getApiCurrentUser
+  binding: rest
+  confidence: high
+  note: 'Derived candidate tool: it IS the operation, so the binding is exact and the tool inherits that
+    operation''s parameters verbatim.'
+- tool: list_devices
+  category: devices
+  rest:
+  - getApiDevices
+  binding: rest
+  confidence: high
+  note: 'Derived candidate tool: it IS the operation, so the binding is exact and the tool inherits that
+    operation''s parameters verbatim.'
+- tool: get_devices
+  category: devices
+  rest:
+  - getApiDevicesId
+  binding: rest
+  confidence: high
+  note: 'Derived candidate tool: it IS the operation, so the binding is exact and the tool inherits that
+    operation''s parameters verbatim.'
+- tool: delete_devices
+  category: devices
+  rest:
+  - deleteApiDevicesId
+  binding: rest
+  confidence: high
+  note: 'Derived candidate tool: it IS the operation, so the binding is exact and the tool inherits that
+    operation''s parameters verbatim.'
+- tool: list_editions
+  category: editions
+  rest:
+  - getApiEditions
+  binding: rest
+  confidence: high
+  note: 'Derived candidate tool: it IS the operation, so the binding is exact and the tool inherits that
+    operation''s parameters verbatim.'
+- tool: get_editions
+  category: editions
+  rest:
+  - getApiEditionsId
+  binding: rest
+  confidence: high
+  note: 'Derived candidate tool: it IS the operation, so the binding is exact and the tool inherits that
+    operation''s parameters verbatim.'
+- tool: list_fairs
+  category: fairs
+  rest:
+  - getApiFairs
+  binding: rest
+  confidence: high
+  note: 'Derived candidate tool: it IS the operation, so the binding is exact and the tool inherits that
+    operation''s parameters verbatim.'
+- tool: get_fairs
+  category: fairs
+  rest:
+  - getApiFairsId
+  binding: rest
+  confidence: high
+  note: 'Derived candidate tool: it IS the operation, so the binding is exact and the tool inherits that
+    operation''s parameters verbatim.'
+- tool: list_genes
+  category: genes
+  rest:
+  - getApiGenes
+  binding: rest
+  confidence: high
+  note: 'Derived candidate tool: it IS the operation, so the binding is exact and the tool inherits that
+    operation''s parameters verbatim.'
+- tool: get_genes
+  category: genes
+  rest:
+  - getApiGenesId
+  binding: rest
+  confidence: high
+  note: 'Derived candidate tool: it IS the operation, so the binding is exact and the tool inherits that
+    operation''s parameters verbatim.'
+- tool: list_images
+  category: images
+  rest:
+  - getApiImages
+  binding: rest
+  confidence: high
+  note: 'Derived candidate tool: it IS the operation, so the binding is exact and the tool inherits that
+    operation''s parameters verbatim.'
+- tool: get_images
+  category: images
+  rest:
+  - getApiImagesId
+  binding: rest
+  confidence: high
+  note: 'Derived candidate tool: it IS the operation, so the binding is exact and the tool inherits that
+    operation''s parameters verbatim.'
+- tool: list_lot_standings
+  category: lot_standings
+  rest:
+  - getApiLotStandings
+  binding: rest
+  confidence: high
+  note: 'Derived candidate tool: it IS the operation, so the binding is exact and the tool inherits that
+    operation''s parameters verbatim.'
+- tool: list_partner_communications
+  category: partner_communications
+  rest:
+  - getApiPartnerCommunications
+  binding: rest
+  confidence: high
+  note: 'Derived candidate tool: it IS the operation, so the binding is exact and the tool inherits that
+    operation''s parameters verbatim.'
+- tool: get_partner_communications
+  category: partner_communications
+  rest:
+  - getApiPartnerCommunicationsId
+  binding: rest
+  confidence: high
+  note: 'Derived candidate tool: it IS the operation, so the binding is exact and the tool inherits that
+    operation''s parameters verbatim.'
+- tool: list_partner_contacts
+  category: partner_contacts
+  rest:
+  - getApiPartnerContacts
+  binding: rest
+  confidence: high
+  note: 'Derived candidate tool: it IS the operation, so the binding is exact and the tool inherits that
+    operation''s parameters verbatim.'
+- tool: get_partner_contacts
+  category: partner_contacts
+  rest:
+  - getApiPartnerContactsId
+  binding: rest
+  confidence: high
+  note: 'Derived candidate tool: it IS the operation, so the binding is exact and the tool inherits that
+    operation''s parameters verbatim.'
+- tool: list_partners
+  category: partners
+  rest:
+  - getApiPartners
+  binding: rest
+  confidence: high
+  note: 'Derived candidate tool: it IS the operation, so the binding is exact and the tool inherits that
+    operation''s parameters verbatim.'
+- tool: get_partners
+  category: partners
+  rest:
+  - getApiPartnersId
+  binding: rest
+  confidence: high
+  note: 'Derived candidate tool: it IS the operation, so the binding is exact and the tool inherits that
+    operation''s parameters verbatim.'
+- tool: list_profiles
+  category: profiles
+  rest:
+  - getApiProfiles
+  binding: rest
+  confidence: high
+  note: 'Derived candidate tool: it IS the operation, so the binding is exact and the tool inherits that
+    operation''s parameters verbatim.'
+- tool: get_profiles
+  category: profiles
+  rest:
+  - getApiProfilesId
+  binding: rest
+  confidence: high
+  note: 'Derived candidate tool: it IS the operation, so the binding is exact and the tool inherits that
+    operation''s parameters verbatim.'
+- tool: list_sale_artworks
+  category: sale_artworks
+  rest:
+  - getApiSaleArtworks
+  binding: rest
+  confidence: high
+  note: 'Derived candidate tool: it IS the operation, so the binding is exact and the tool inherits that
+    operation''s parameters verbatim.'
+- tool: get_sale_artworks
+  category: sale_artworks
+  rest:
+  - getApiSaleArtworksId
+  binding: rest
+  confidence: high
+  note: 'Derived candidate tool: it IS the operation, so the binding is exact and the tool inherits that
+    operation''s parameters verbatim.'
+- tool: list_sales
+  category: sales
+  rest:
+  - getApiSales
+  binding: rest
+  confidence: high
+  note: 'Derived candidate tool: it IS the operation, so the binding is exact and the tool inherits that
+    operation''s parameters verbatim.'
+- tool: get_sales
+  category: sales
+  rest:
+  - getApiSalesId
+  binding: rest
+  confidence: high
+  note: 'Derived candidate tool: it IS the operation, so the binding is exact and the tool inherits that
+    operation''s parameters verbatim.'
+- tool: list_search
+  category: search
+  rest:
+  - getApiSearch
+  binding: rest
+  confidence: high
+  note: 'Derived candidate tool: it IS the operation, so the binding is exact and the tool inherits that
+    operation''s parameters verbatim.'
+- tool: list_shows
+  category: shows
+  rest:
+  - getApiShows
+  binding: rest
+  confidence: high
+  note: 'Derived candidate tool: it IS the operation, so the binding is exact and the tool inherits that
+    operation''s parameters verbatim.'
+- tool: get_shows
+  category: shows
+  rest:
+  - getApiShowsId
+  binding: rest
+  confidence: high
+  note: 'Derived candidate tool: it IS the operation, so the binding is exact and the tool inherits that
+    operation''s parameters verbatim.'
+- tool: list_status
+  category: status
+  rest:
+  - getApiStatus
+  binding: rest
+  confidence: high
+  note: 'Derived candidate tool: it IS the operation, so the binding is exact and the tool inherits that
+    operation''s parameters verbatim.'
+- tool: list_tokens
+  category: tokens
+  rest:
+  - getApiTokens
+  binding: rest
+  confidence: high
+  note: 'Derived candidate tool: it IS the operation, so the binding is exact and the tool inherits that
+    operation''s parameters verbatim.'
+- tool: delete_tokens_access_token
+  category: tokens
+  rest:
+  - deleteApiTokensAccessToken
+  binding: rest
+  confidence: high
+  note: 'Derived candidate tool: it IS the operation, so the binding is exact and the tool inherits that
+    operation''s parameters verbatim.'
+- tool: create_tokens_xapp_token
+  category: tokens
+  rest:
+  - postApiTokensXappToken
+  binding: rest
+  confidence: high
+  note: 'Derived candidate tool: it IS the operation, so the binding is exact and the tool inherits that
+    operation''s parameters verbatim.'
+- tool: get_user_details
+  category: user_details
+  rest:
+  - getApiUserDetailsId
+  binding: rest
+  confidence: high
+  note: 'Derived candidate tool: it IS the operation, so the binding is exact and the tool inherits that
+    operation''s parameters verbatim.'
+- tool: list_user_fair_actions
+  category: user_fair_actions
+  rest:
+  - getApiUserFairActions
+  binding: rest
+  confidence: high
+  note: 'Derived candidate tool: it IS the operation, so the binding is exact and the tool inherits that
+    operation''s parameters verbatim.'
+- tool: get_user_fair_actions
+  category: user_fair_actions
+  rest:
+  - getApiUserFairActionsId
+  binding: rest
+  confidence: high
+  note: 'Derived candidate tool: it IS the operation, so the binding is exact and the tool inherits that
+    operation''s parameters verbatim.'
+- tool: list_users
+  category: users
+  rest:
+  - getApiUsers
+  binding: rest
+  confidence: high
+  note: 'Derived candidate tool: it IS the operation, so the binding is exact and the tool inherits that
+    operation''s parameters verbatim.'
+- tool: get_users
+  category: users
+  rest:
+  - getApiUsersId
+  binding: rest
+  confidence: high
+  note: 'Derived candidate tool: it IS the operation, so the binding is exact and the tool inherits that
+    operation''s parameters verbatim.'
+mcp_only: []
+mcp_only_note: No MCP server exists, so there are no MCP-only tools. The divergence on this provider is
+  REST vs GraphQL, recorded below.
+graphql_only:
+- group: commerce / orders
+  fields:
+  - commerceAbandonedOrders
+  - commerceBankAccountBalance
+  - commerceBuyerActivity
+  - commerceCompetingOrders
+  - commerceLineItems
+  - commerceMyOrders
+  - commerceOrder
+  - commerceOrderResult
+  - commerceOrders
+  - commerceAddInitialOfferToOrder
+  - commerceApproveOrder
+  - commerceBuyerAcceptOffer
+  - commerceBuyerCounterOffer
+  - commerceBuyerRejectOffer
+  - commerceConfirmFulfillment
+  - commerceConfirmPickup
+  - commerceCreateBankDebitSetupForOrder
+  - commerceCreateInquiryOfferOrderWithArtwork
+  - commerceCreateInquiryOrderWithArtwork
+  - commerceCreateOfferOrderWithArtwork
+  reason: Artsy's entire buy/offer/checkout surface (Exchange) is GraphQL-only. The REST Public API exposes
+    bids and bidder positions for auctions but no order, offer, payment or fulfilment operation at all.
+- group: editorial
+  fields:
+  - article
+  - articles
+  - articlesConnection
+  - author
+  - authorsConnection
+  - channel
+  - page
+  - pagesConnection
+  - staticContent
+  - video
+  - videosConnection
+  reason: Artsy Editorial (articles, authors, channels, videos) has no REST representation.
+- group: viewing rooms
+  fields:
+  - privateViewingRoom
+  - viewingRoom
+  - viewingRooms
+  - viewingRoomsConnection
+  reason: Viewing Rooms are a first-class product on artsy.net and in llms.txt, and are absent from the
+    REST contract entirely.
+- group: price & market insights
+  fields:
+  - analyticsArtistSparklines
+  - analyticsArtworkRecommendations
+  - analyticsCalendarYearMarketPriceInsights
+  - analyticsCalendarYearPriceInsights
+  - analyticsLastUpdatedAt
+  - analyticsPartnerStats
+  - analyticsUserStats
+  - auctionResult
+  - auctionResultsByArtistsConnection
+  - marketPriceInsights
+  - priceInsights
+  - recentlySoldArtworks
+  reason: The Price Database / auction-results surface — arguably Artsy's most commercially valuable data
+    — is GraphQL-only and not in the Public API.
+- group: consignments & submissions
+  fields:
+  - consignments
+  - submission
+  - submissions
+  - addAssetToConsignmentSubmission
+  - addAssetsToConsignmentSubmission
+  - convectionCreateConsignmentSubmission
+  - createConsignmentInquiry
+  - createConsignmentOffer
+  - createConsignmentOfferResponse
+  - createConsignmentSubmission
+  - removeAssetFromConsignmentSubmission
+  - updateConsignmentSubmission
+  reason: Sell-side consignment submission flows exist only in Metaphysics.
+- group: conversations & notifications
+  fields:
+  - conversation
+  - conversationsConnection
+  - notificationPreferences
+  - notificationsConnection
+  reason: Collector-gallery inquiry messaging is GraphQL-only.
+- group: discovery & personalization
+  fields:
+  - artworksForUser
+  - curatedMarketingCollections
+  - curatedTrendingArtists
+  - discoverArtworks
+  - discoveryCategoriesConnection
+  - discoveryCategoryArtworksConnection
+  - discoveryCategoryConnection
+  - discoveryMarketingCollections
+  - homePage
+  - homeView
+  - marketingCollection
+  - marketingCollections
+  - trendingSearches
+  reason: The recommendation/home-feed layer that powers artsy.net and the mobile apps has no REST analogue.
+- group: artwork import / partner CMS
+  fields:
+  - artnetImport
+  - artworkImport
+  - batchArtworkImportImages
+  - createArtworkImport
+  - createArtworkImportArtistAssignment
+  - createArtworkImportArtistMatch
+  - createArtworkImportArtworks
+  - createArtworkImportCellFlag
+  - deleteArtworkImport
+  - removeArtworkImportImage
+  - updateArtworkImport
+  - updateArtworkImportRow
+  reason: Bulk partner ingestion tooling — the Partner API surface referenced in the retirement notice
+    — surfaces through GraphQL, not the public REST contract.
+rest_only:
+- capability: client application management
+  operations:
+  - getApiApplications
+  - postApiApplications
+  - getApiApplicationsId
+  - putApiApplicationsId
+  - deleteApiApplicationsId
+  reason: Registering and managing an OAuth client application is a REST-only administrative surface;
+    Metaphysics has no equivalent root field.
+- capability: token minting and revocation
+  operations:
+  - getApiTokens
+  - postApiTokensXappToken
+  - deleteApiTokensAccessToken
+  reason: Token lifecycle is REST-only — and it is the prerequisite for calling either surface.
+- capability: push devices
+  operations:
+  - getApiDevices
+  - getApiDevicesId
+  - deleteApiDevicesId
+  reason: Device registration for push notifications has no public GraphQL root field.
+- capability: partner communications and contacts
+  operations:
+  - getApiPartnerCommunications
+  - getApiPartnerCommunicationsId
+  - getApiPartnerContacts
+  - getApiPartnerContactsId
+  reason: Exposed on the REST contract only.
+- capability: user fair actions
+  operations:
+  - getApiUserFairActions
+  - getApiUserFairActionsId
+  reason: REST-only.
+- capability: API status
+  operations:
+  - getApiStatus
+  reason: A machine-readable health endpoint on the REST surface; no GraphQL analogue.
+coverage:
+  tools_named: 53
+  tools_bound: 53
+  mcp_only: 0
+  rest_ops_total: 53
+  rest_ops_with_a_tool: 53
+  graphql_query_root_fields: 165
+  graphql_mutations: 306
+  graphql_only_capability_groups: 8
+  note: 'The headline number: 53 REST operations against 471 GraphQL root fields and mutations. An agent
+    restricted to the published OpenAPI sees roughly a ninth of what Artsy actually exposes.'
