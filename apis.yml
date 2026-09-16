@@ -63,70 +63,630 @@ specificationVersion: '0.23'
 url: >-
   https://raw.githubusercontent.com/api-evangelist/artsy/refs/heads/main/apis.yml
 apis:
-  - aid: artsy:artsy-api
-    name: Artsy Public API
-    description: >-
-      The Artsy Public API provides access to images of historic artwork and
-      related information on artsy.net for educational and non-commercial
-      purposes. Resources include artists, artworks, editions, fairs, genes
-      (art classification taxonomy), images, shows, collections, partners,
-      profiles, search, sales, bids, and bidder positions.
-    humanURL: https://developers.artsy.net/
-    baseURL: https://api.artsy.net/api
-    tags:
-      - Art
-      - Artists
-      - Artwork
-      - Galleries
-      - Search
-    properties:
-      - type: Documentation
-        url: https://developers.artsy.net/v2
-      - type: GettingStarted
-        url: https://developers.artsy.net/v2/docs/authentication
-      - type: Authentication
-        url: https://developers.artsy.net/v2/docs/authentication
-      - type: OpenAPI
-        url: openapi/artsy-public-api-openapi.yml
-      - type: APIReference
-        url: https://developers.artsy.net/v2
-        title: Artsy Public API Reference (v2)
-      - type: TermsOfService
-        url: https://developers.artsy.net/v2/terms
-        title: Artsy Public API Terms of Use
-      - type: Console
-        url: https://developers.artsy.net/v2/playground
-        title: API Playground (Artsy login required)
-  - aid: artsy:metaphysics
-    name: Artsy Metaphysics GraphQL API
-    description: >-
-      Metaphysics is Artsy's public GraphQL gateway — the contract that actually powers artsy.net and
-      the Artsy iOS and Android apps. It wraps Artsy's internal services (Gravity, Exchange,
-      Convection) behind a single Relay-compatible schema of 1,478 object types, 165 Query root fields
-      and 306 mutations, covering commerce and offers, editorial, viewing rooms, price and auction
-      insights, consignment submissions, conversations and personalized discovery — none of which the
-      retiring REST Public API exposes. Runtime introspection is disabled; Artsy publishes the schema
-      instead as _schemaV2.graphql in the open-source metaphysics repository. Most fields require a
-      user access token obtained through the same OAuth 2 endpoints as the REST API.
-    humanURL: https://github.com/artsy/metaphysics
-    baseURL: https://metaphysics-production.artsy.net/v2
-    tags:
-      - GraphQL
-      - Art
-      - Commerce
-      - Auctions
-      - Editorial
-    properties:
-      - type: GraphQL
-        url: graphql/artsy-metaphysics.graphql
-      - type: GraphQLSchema
-        url: graphql/artsy-metaphysics.graphql
-      - type: SourceCode
-        url: https://github.com/artsy/metaphysics
-      - type: Documentation
-        url: https://github.com/artsy/metaphysics/blob/main/README.md
-      - type: ToolCrosswalk
-        url: mcp/artsy-tool-crosswalk.yml
+- aid: artsy:metaphysics
+  name: Artsy Metaphysics GraphQL API
+  description: >-
+    Metaphysics is Artsy's public GraphQL gateway — the contract that actually powers artsy.net and the
+    Artsy iOS and Android apps. It wraps Artsy's internal services (Gravity, Exchange, Convection) behind
+    a single Relay-compatible schema of 1,478 object types, 165 Query root fields and 306 mutations, covering
+    commerce and offers, editorial, viewing rooms, price and auction insights, consignment submissions,
+    conversations and personalized discovery — none of which the retiring REST Public API exposes. Runtime
+    introspection is disabled; Artsy publishes the schema instead as _schemaV2.graphql in the open-source
+    metaphysics repository. Most fields require a user access token obtained through the same OAuth 2
+    endpoints as the REST API.
+  humanURL: https://github.com/artsy/metaphysics
+  baseURL: https://metaphysics-production.artsy.net/v2
+  tags:
+  - GraphQL
+  - Art
+  - Commerce
+  - Auctions
+  - Editorial
+  properties:
+  - type: GraphQL
+    url: graphql/artsy-metaphysics.graphql
+  - type: GraphQLSchema
+    url: graphql/artsy-metaphysics.graphql
+  - type: SourceCode
+    url: https://github.com/artsy/metaphysics
+  - type: Documentation
+    url: https://github.com/artsy/metaphysics/blob/main/README.md
+  - type: ToolCrosswalk
+    url: mcp/artsy-tool-crosswalk.yml
+- aid: artsy:artsy-applications-api
+  name: Artsy Applications API
+  description: Operations about applications
+  humanURL: https://developers.artsy.net/
+  baseURL: https://api.artsy.net/api
+  tags:
+  - applications
+  properties:
+  - type: OpenAPI
+    url: openapi/artsy-applications-api-openapi.yml
+  - type: Documentation
+    url: https://developers.artsy.net/v2
+  - type: GettingStarted
+    url: https://developers.artsy.net/v2/docs/authentication
+  - type: Authentication
+    url: https://developers.artsy.net/v2/docs/authentication
+  - type: APIReference
+    url: https://developers.artsy.net/v2
+  - type: TermsOfService
+    url: https://developers.artsy.net/v2/terms
+  - type: Console
+    url: https://developers.artsy.net/v2/playground
+- aid: artsy:artsy-artists-api
+  name: Artsy Artists API
+  description: Operations about artists
+  humanURL: https://developers.artsy.net/
+  baseURL: https://api.artsy.net/api
+  tags:
+  - artists
+  properties:
+  - type: OpenAPI
+    url: openapi/artsy-artists-api-openapi.yml
+  - type: Documentation
+    url: https://developers.artsy.net/v2
+  - type: GettingStarted
+    url: https://developers.artsy.net/v2/docs/authentication
+  - type: Authentication
+    url: https://developers.artsy.net/v2/docs/authentication
+  - type: APIReference
+    url: https://developers.artsy.net/v2
+  - type: TermsOfService
+    url: https://developers.artsy.net/v2/terms
+  - type: Console
+    url: https://developers.artsy.net/v2/playground
+- aid: artsy:artsy-artworks-api
+  name: Artsy Artworks API
+  description: Operations about artworks
+  humanURL: https://developers.artsy.net/
+  baseURL: https://api.artsy.net/api
+  tags:
+  - artworks
+  properties:
+  - type: OpenAPI
+    url: openapi/artsy-artworks-api-openapi.yml
+  - type: Documentation
+    url: https://developers.artsy.net/v2
+  - type: GettingStarted
+    url: https://developers.artsy.net/v2/docs/authentication
+  - type: Authentication
+    url: https://developers.artsy.net/v2/docs/authentication
+  - type: APIReference
+    url: https://developers.artsy.net/v2
+  - type: TermsOfService
+    url: https://developers.artsy.net/v2/terms
+  - type: Console
+    url: https://developers.artsy.net/v2/playground
+- aid: artsy:artsy-bidder-positions-api
+  name: Artsy Bidder Positions API
+  description: Operations about bidder_positions
+  humanURL: https://developers.artsy.net/
+  baseURL: https://api.artsy.net/api
+  tags:
+  - bidder_positions
+  properties:
+  - type: OpenAPI
+    url: openapi/artsy-bidder-positions-api-openapi.yml
+  - type: Documentation
+    url: https://developers.artsy.net/v2
+  - type: GettingStarted
+    url: https://developers.artsy.net/v2/docs/authentication
+  - type: Authentication
+    url: https://developers.artsy.net/v2/docs/authentication
+  - type: APIReference
+    url: https://developers.artsy.net/v2
+  - type: TermsOfService
+    url: https://developers.artsy.net/v2/terms
+  - type: Console
+    url: https://developers.artsy.net/v2/playground
+- aid: artsy:artsy-bidders-api
+  name: Artsy Bidders API
+  description: Operations about bidders
+  humanURL: https://developers.artsy.net/
+  baseURL: https://api.artsy.net/api
+  tags:
+  - bidders
+  properties:
+  - type: OpenAPI
+    url: openapi/artsy-bidders-api-openapi.yml
+  - type: Documentation
+    url: https://developers.artsy.net/v2
+  - type: GettingStarted
+    url: https://developers.artsy.net/v2/docs/authentication
+  - type: Authentication
+    url: https://developers.artsy.net/v2/docs/authentication
+  - type: APIReference
+    url: https://developers.artsy.net/v2
+  - type: TermsOfService
+    url: https://developers.artsy.net/v2/terms
+  - type: Console
+    url: https://developers.artsy.net/v2/playground
+- aid: artsy:artsy-collection-items-api
+  name: Artsy Collection Items API
+  description: Operations about collection_items
+  humanURL: https://developers.artsy.net/
+  baseURL: https://api.artsy.net/api
+  tags:
+  - collection_items
+  properties:
+  - type: OpenAPI
+    url: openapi/artsy-collection-items-api-openapi.yml
+  - type: Documentation
+    url: https://developers.artsy.net/v2
+  - type: GettingStarted
+    url: https://developers.artsy.net/v2/docs/authentication
+  - type: Authentication
+    url: https://developers.artsy.net/v2/docs/authentication
+  - type: APIReference
+    url: https://developers.artsy.net/v2
+  - type: TermsOfService
+    url: https://developers.artsy.net/v2/terms
+  - type: Console
+    url: https://developers.artsy.net/v2/playground
+- aid: artsy:artsy-collector-profiles-api
+  name: Artsy Collector Profiles API
+  description: Operations about collector_profiles
+  humanURL: https://developers.artsy.net/
+  baseURL: https://api.artsy.net/api
+  tags:
+  - collector_profiles
+  properties:
+  - type: OpenAPI
+    url: openapi/artsy-collector-profiles-api-openapi.yml
+  - type: Documentation
+    url: https://developers.artsy.net/v2
+  - type: GettingStarted
+    url: https://developers.artsy.net/v2/docs/authentication
+  - type: Authentication
+    url: https://developers.artsy.net/v2/docs/authentication
+  - type: APIReference
+    url: https://developers.artsy.net/v2
+  - type: TermsOfService
+    url: https://developers.artsy.net/v2/terms
+  - type: Console
+    url: https://developers.artsy.net/v2/playground
+- aid: artsy:artsy-current-user-api
+  name: Artsy Current User API
+  description: Operations about current_users
+  humanURL: https://developers.artsy.net/
+  baseURL: https://api.artsy.net/api
+  tags:
+  - current_user
+  properties:
+  - type: OpenAPI
+    url: openapi/artsy-current-user-api-openapi.yml
+  - type: Documentation
+    url: https://developers.artsy.net/v2
+  - type: GettingStarted
+    url: https://developers.artsy.net/v2/docs/authentication
+  - type: Authentication
+    url: https://developers.artsy.net/v2/docs/authentication
+  - type: APIReference
+    url: https://developers.artsy.net/v2
+  - type: TermsOfService
+    url: https://developers.artsy.net/v2/terms
+  - type: Console
+    url: https://developers.artsy.net/v2/playground
+- aid: artsy:artsy-devices-api
+  name: Artsy Devices API
+  description: Operations about devices
+  humanURL: https://developers.artsy.net/
+  baseURL: https://api.artsy.net/api
+  tags:
+  - devices
+  properties:
+  - type: OpenAPI
+    url: openapi/artsy-devices-api-openapi.yml
+  - type: Documentation
+    url: https://developers.artsy.net/v2
+  - type: GettingStarted
+    url: https://developers.artsy.net/v2/docs/authentication
+  - type: Authentication
+    url: https://developers.artsy.net/v2/docs/authentication
+  - type: APIReference
+    url: https://developers.artsy.net/v2
+  - type: TermsOfService
+    url: https://developers.artsy.net/v2/terms
+  - type: Console
+    url: https://developers.artsy.net/v2/playground
+- aid: artsy:artsy-editions-api
+  name: Artsy Editions API
+  description: Operations about editions
+  humanURL: https://developers.artsy.net/
+  baseURL: https://api.artsy.net/api
+  tags:
+  - editions
+  properties:
+  - type: OpenAPI
+    url: openapi/artsy-editions-api-openapi.yml
+  - type: Documentation
+    url: https://developers.artsy.net/v2
+  - type: GettingStarted
+    url: https://developers.artsy.net/v2/docs/authentication
+  - type: Authentication
+    url: https://developers.artsy.net/v2/docs/authentication
+  - type: APIReference
+    url: https://developers.artsy.net/v2
+  - type: TermsOfService
+    url: https://developers.artsy.net/v2/terms
+  - type: Console
+    url: https://developers.artsy.net/v2/playground
+- aid: artsy:artsy-fairs-api
+  name: Artsy Fairs API
+  description: Operations about fairs
+  humanURL: https://developers.artsy.net/
+  baseURL: https://api.artsy.net/api
+  tags:
+  - fairs
+  properties:
+  - type: OpenAPI
+    url: openapi/artsy-fairs-api-openapi.yml
+  - type: Documentation
+    url: https://developers.artsy.net/v2
+  - type: GettingStarted
+    url: https://developers.artsy.net/v2/docs/authentication
+  - type: Authentication
+    url: https://developers.artsy.net/v2/docs/authentication
+  - type: APIReference
+    url: https://developers.artsy.net/v2
+  - type: TermsOfService
+    url: https://developers.artsy.net/v2/terms
+  - type: Console
+    url: https://developers.artsy.net/v2/playground
+- aid: artsy:artsy-genes-api
+  name: Artsy Genes API
+  description: Operations about genes
+  humanURL: https://developers.artsy.net/
+  baseURL: https://api.artsy.net/api
+  tags:
+  - genes
+  properties:
+  - type: OpenAPI
+    url: openapi/artsy-genes-api-openapi.yml
+  - type: Documentation
+    url: https://developers.artsy.net/v2
+  - type: GettingStarted
+    url: https://developers.artsy.net/v2/docs/authentication
+  - type: Authentication
+    url: https://developers.artsy.net/v2/docs/authentication
+  - type: APIReference
+    url: https://developers.artsy.net/v2
+  - type: TermsOfService
+    url: https://developers.artsy.net/v2/terms
+  - type: Console
+    url: https://developers.artsy.net/v2/playground
+- aid: artsy:artsy-images-api
+  name: Artsy Images API
+  description: Operations about images
+  humanURL: https://developers.artsy.net/
+  baseURL: https://api.artsy.net/api
+  tags:
+  - images
+  properties:
+  - type: OpenAPI
+    url: openapi/artsy-images-api-openapi.yml
+  - type: Documentation
+    url: https://developers.artsy.net/v2
+  - type: GettingStarted
+    url: https://developers.artsy.net/v2/docs/authentication
+  - type: Authentication
+    url: https://developers.artsy.net/v2/docs/authentication
+  - type: APIReference
+    url: https://developers.artsy.net/v2
+  - type: TermsOfService
+    url: https://developers.artsy.net/v2/terms
+  - type: Console
+    url: https://developers.artsy.net/v2/playground
+- aid: artsy:artsy-lot-standings-api
+  name: Artsy Lot Standings API
+  description: Operations about lot_standings
+  humanURL: https://developers.artsy.net/
+  baseURL: https://api.artsy.net/api
+  tags:
+  - lot_standings
+  properties:
+  - type: OpenAPI
+    url: openapi/artsy-lot-standings-api-openapi.yml
+  - type: Documentation
+    url: https://developers.artsy.net/v2
+  - type: GettingStarted
+    url: https://developers.artsy.net/v2/docs/authentication
+  - type: Authentication
+    url: https://developers.artsy.net/v2/docs/authentication
+  - type: APIReference
+    url: https://developers.artsy.net/v2
+  - type: TermsOfService
+    url: https://developers.artsy.net/v2/terms
+  - type: Console
+    url: https://developers.artsy.net/v2/playground
+- aid: artsy:artsy-partner-communications-api
+  name: Artsy Partner Communications API
+  description: Operations about partner_communications
+  humanURL: https://developers.artsy.net/
+  baseURL: https://api.artsy.net/api
+  tags:
+  - partner_communications
+  properties:
+  - type: OpenAPI
+    url: openapi/artsy-partner-communications-api-openapi.yml
+  - type: Documentation
+    url: https://developers.artsy.net/v2
+  - type: GettingStarted
+    url: https://developers.artsy.net/v2/docs/authentication
+  - type: Authentication
+    url: https://developers.artsy.net/v2/docs/authentication
+  - type: APIReference
+    url: https://developers.artsy.net/v2
+  - type: TermsOfService
+    url: https://developers.artsy.net/v2/terms
+  - type: Console
+    url: https://developers.artsy.net/v2/playground
+- aid: artsy:artsy-partner-contacts-api
+  name: Artsy Partner Contacts API
+  description: Operations about partner_contacts
+  humanURL: https://developers.artsy.net/
+  baseURL: https://api.artsy.net/api
+  tags:
+  - partner_contacts
+  properties:
+  - type: OpenAPI
+    url: openapi/artsy-partner-contacts-api-openapi.yml
+  - type: Documentation
+    url: https://developers.artsy.net/v2
+  - type: GettingStarted
+    url: https://developers.artsy.net/v2/docs/authentication
+  - type: Authentication
+    url: https://developers.artsy.net/v2/docs/authentication
+  - type: APIReference
+    url: https://developers.artsy.net/v2
+  - type: TermsOfService
+    url: https://developers.artsy.net/v2/terms
+  - type: Console
+    url: https://developers.artsy.net/v2/playground
+- aid: artsy:artsy-partners-api
+  name: Artsy Partners API
+  description: Operations about partners
+  humanURL: https://developers.artsy.net/
+  baseURL: https://api.artsy.net/api
+  tags:
+  - partners
+  properties:
+  - type: OpenAPI
+    url: openapi/artsy-partners-api-openapi.yml
+  - type: Documentation
+    url: https://developers.artsy.net/v2
+  - type: GettingStarted
+    url: https://developers.artsy.net/v2/docs/authentication
+  - type: Authentication
+    url: https://developers.artsy.net/v2/docs/authentication
+  - type: APIReference
+    url: https://developers.artsy.net/v2
+  - type: TermsOfService
+    url: https://developers.artsy.net/v2/terms
+  - type: Console
+    url: https://developers.artsy.net/v2/playground
+- aid: artsy:artsy-profiles-api
+  name: Artsy Profiles API
+  description: Operations about profiles
+  humanURL: https://developers.artsy.net/
+  baseURL: https://api.artsy.net/api
+  tags:
+  - profiles
+  properties:
+  - type: OpenAPI
+    url: openapi/artsy-profiles-api-openapi.yml
+  - type: Documentation
+    url: https://developers.artsy.net/v2
+  - type: GettingStarted
+    url: https://developers.artsy.net/v2/docs/authentication
+  - type: Authentication
+    url: https://developers.artsy.net/v2/docs/authentication
+  - type: APIReference
+    url: https://developers.artsy.net/v2
+  - type: TermsOfService
+    url: https://developers.artsy.net/v2/terms
+  - type: Console
+    url: https://developers.artsy.net/v2/playground
+- aid: artsy:artsy-sale-artworks-api
+  name: Artsy Sale Artworks API
+  description: Operations about sale_artworks
+  humanURL: https://developers.artsy.net/
+  baseURL: https://api.artsy.net/api
+  tags:
+  - sale_artworks
+  properties:
+  - type: OpenAPI
+    url: openapi/artsy-sale-artworks-api-openapi.yml
+  - type: Documentation
+    url: https://developers.artsy.net/v2
+  - type: GettingStarted
+    url: https://developers.artsy.net/v2/docs/authentication
+  - type: Authentication
+    url: https://developers.artsy.net/v2/docs/authentication
+  - type: APIReference
+    url: https://developers.artsy.net/v2
+  - type: TermsOfService
+    url: https://developers.artsy.net/v2/terms
+  - type: Console
+    url: https://developers.artsy.net/v2/playground
+- aid: artsy:artsy-sales-api
+  name: Artsy Sales API
+  description: Operations about sales
+  humanURL: https://developers.artsy.net/
+  baseURL: https://api.artsy.net/api
+  tags:
+  - sales
+  properties:
+  - type: OpenAPI
+    url: openapi/artsy-sales-api-openapi.yml
+  - type: Documentation
+    url: https://developers.artsy.net/v2
+  - type: GettingStarted
+    url: https://developers.artsy.net/v2/docs/authentication
+  - type: Authentication
+    url: https://developers.artsy.net/v2/docs/authentication
+  - type: APIReference
+    url: https://developers.artsy.net/v2
+  - type: TermsOfService
+    url: https://developers.artsy.net/v2/terms
+  - type: Console
+    url: https://developers.artsy.net/v2/playground
+- aid: artsy:artsy-search-api
+  name: Artsy Search API
+  description: Operations about searches
+  humanURL: https://developers.artsy.net/
+  baseURL: https://api.artsy.net/api
+  tags:
+  - search
+  properties:
+  - type: OpenAPI
+    url: openapi/artsy-search-api-openapi.yml
+  - type: Documentation
+    url: https://developers.artsy.net/v2
+  - type: GettingStarted
+    url: https://developers.artsy.net/v2/docs/authentication
+  - type: Authentication
+    url: https://developers.artsy.net/v2/docs/authentication
+  - type: APIReference
+    url: https://developers.artsy.net/v2
+  - type: TermsOfService
+    url: https://developers.artsy.net/v2/terms
+  - type: Console
+    url: https://developers.artsy.net/v2/playground
+- aid: artsy:artsy-shows-api
+  name: Artsy Shows API
+  description: Operations about shows
+  humanURL: https://developers.artsy.net/
+  baseURL: https://api.artsy.net/api
+  tags:
+  - shows
+  properties:
+  - type: OpenAPI
+    url: openapi/artsy-shows-api-openapi.yml
+  - type: Documentation
+    url: https://developers.artsy.net/v2
+  - type: GettingStarted
+    url: https://developers.artsy.net/v2/docs/authentication
+  - type: Authentication
+    url: https://developers.artsy.net/v2/docs/authentication
+  - type: APIReference
+    url: https://developers.artsy.net/v2
+  - type: TermsOfService
+    url: https://developers.artsy.net/v2/terms
+  - type: Console
+    url: https://developers.artsy.net/v2/playground
+- aid: artsy:artsy-status-api
+  name: Artsy Status API
+  description: Operations about statuses
+  humanURL: https://developers.artsy.net/
+  baseURL: https://api.artsy.net/api
+  tags:
+  - status
+  properties:
+  - type: OpenAPI
+    url: openapi/artsy-status-api-openapi.yml
+  - type: Documentation
+    url: https://developers.artsy.net/v2
+  - type: GettingStarted
+    url: https://developers.artsy.net/v2/docs/authentication
+  - type: Authentication
+    url: https://developers.artsy.net/v2/docs/authentication
+  - type: APIReference
+    url: https://developers.artsy.net/v2
+  - type: TermsOfService
+    url: https://developers.artsy.net/v2/terms
+  - type: Console
+    url: https://developers.artsy.net/v2/playground
+- aid: artsy:artsy-tokens-api
+  name: Artsy Tokens API
+  description: Operations about tokens
+  humanURL: https://developers.artsy.net/
+  baseURL: https://api.artsy.net/api
+  tags:
+  - tokens
+  properties:
+  - type: OpenAPI
+    url: openapi/artsy-tokens-api-openapi.yml
+  - type: Documentation
+    url: https://developers.artsy.net/v2
+  - type: GettingStarted
+    url: https://developers.artsy.net/v2/docs/authentication
+  - type: Authentication
+    url: https://developers.artsy.net/v2/docs/authentication
+  - type: APIReference
+    url: https://developers.artsy.net/v2
+  - type: TermsOfService
+    url: https://developers.artsy.net/v2/terms
+  - type: Console
+    url: https://developers.artsy.net/v2/playground
+- aid: artsy:artsy-user-details-api
+  name: Artsy User Details API
+  description: Operations about user_details
+  humanURL: https://developers.artsy.net/
+  baseURL: https://api.artsy.net/api
+  tags:
+  - user_details
+  properties:
+  - type: OpenAPI
+    url: openapi/artsy-user-details-api-openapi.yml
+  - type: Documentation
+    url: https://developers.artsy.net/v2
+  - type: GettingStarted
+    url: https://developers.artsy.net/v2/docs/authentication
+  - type: Authentication
+    url: https://developers.artsy.net/v2/docs/authentication
+  - type: APIReference
+    url: https://developers.artsy.net/v2
+  - type: TermsOfService
+    url: https://developers.artsy.net/v2/terms
+  - type: Console
+    url: https://developers.artsy.net/v2/playground
+- aid: artsy:artsy-user-fair-actions-api
+  name: Artsy User Fair Actions API
+  description: Operations about user_fair_actions
+  humanURL: https://developers.artsy.net/
+  baseURL: https://api.artsy.net/api
+  tags:
+  - user_fair_actions
+  properties:
+  - type: OpenAPI
+    url: openapi/artsy-user-fair-actions-api-openapi.yml
+  - type: Documentation
+    url: https://developers.artsy.net/v2
+  - type: GettingStarted
+    url: https://developers.artsy.net/v2/docs/authentication
+  - type: Authentication
+    url: https://developers.artsy.net/v2/docs/authentication
+  - type: APIReference
+    url: https://developers.artsy.net/v2
+  - type: TermsOfService
+    url: https://developers.artsy.net/v2/terms
+  - type: Console
+    url: https://developers.artsy.net/v2/playground
+- aid: artsy:artsy-users-api
+  name: Artsy Users API
+  description: Operations about users
+  humanURL: https://developers.artsy.net/
+  baseURL: https://api.artsy.net/api
+  tags:
+  - users
+  properties:
+  - type: OpenAPI
+    url: openapi/artsy-users-api-openapi.yml
+  - type: Documentation
+    url: https://developers.artsy.net/v2
+  - type: GettingStarted
+    url: https://developers.artsy.net/v2/docs/authentication
+  - type: Authentication
+    url: https://developers.artsy.net/v2/docs/authentication
+  - type: APIReference
+    url: https://developers.artsy.net/v2
+  - type: TermsOfService
+    url: https://developers.artsy.net/v2/terms
+  - type: Console
+    url: https://developers.artsy.net/v2/playground
 common:
   - type: AgenticAccess
     url: agentic-access/artsy-agentic-access.yml
