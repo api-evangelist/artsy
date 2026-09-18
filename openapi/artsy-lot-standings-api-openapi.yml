@@ -1,0 +1,34 @@
+openapi: 3.2.0
+info:
+  title: Artsy Public Lot Standings API
+  termsOfService: https://developers.artsy.net/terms
+  contact:
+    name: Artsy API Developers
+    email: artsy-api-developers@googlegroups.com
+    url: https://developers.artsy.net
+  version: v2
+  description: Operations about lot_standings
+servers:
+- url: https://api.artsy.net
+tags:
+- name: lot_standings
+  description: Operations about lot_standings
+paths:
+  /api/lot_standings:
+    get:
+      description: Retrieve standings of individual bidders on lots.
+      parameters:
+      - in: query
+        name: bidder_id
+        description: Bidder id.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Retrieve standings of individual bidders on lots.
+      tags:
+      - lot_standings
+      operationId: getApiLotStandings
+      summary: Get api lot standings
+      x-summary-source: derived

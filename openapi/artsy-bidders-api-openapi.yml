@@ -1,0 +1,87 @@
+openapi: 3.2.0
+info:
+  title: Artsy Public Bidders API
+  termsOfService: https://developers.artsy.net/terms
+  contact:
+    name: Artsy API Developers
+    email: artsy-api-developers@googlegroups.com
+    url: https://developers.artsy.net
+  version: v2
+  description: Operations about bidders
+servers:
+- url: https://api.artsy.net
+tags:
+- name: Bidders
+  description: Operations about bidders
+paths:
+  /api/bidders/{id}:
+    get:
+      description: Retrieve a bidder by id.
+      parameters:
+      - in: path
+        name: id
+        description: Bidder id.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Retrieve a bidder by id.
+      tags:
+      - Bidders
+      operationId: getApiBiddersId
+      summary: Get api bidders id
+      x-summary-source: derived
+  /api/bidders:
+    get:
+      description: Retrieve bidders.
+      parameters:
+      - in: query
+        name: offset
+        description: Offset from which to retrieve.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - in: query
+        name: size
+        description: Number of items to retrieve for this page or from the current offset.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: cursor
+        description: Cursor for pagination.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: sale_id
+        description: Sale id.
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: with_positions
+        description: When true, return only bidders with positions in given sale (sale_id required).
+        required: false
+        schema:
+          type: boolean
+      - in: query
+        name: sort
+        description: Sort order.
+        required: false
+        schema:
+          type: string
+          enum:
+          - created_at
+          - -created_at
+          - -last_bid_placed_at
+      responses:
+        '200':
+          description: Retrieve bidders.
+      tags:
+      - Bidders
+      operationId: getApiBidders
+      summary: Get api bidders
+      x-summary-source: derived

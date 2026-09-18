@@ -1,0 +1,77 @@
+openapi: 3.2.0
+info:
+  title: Artsy Public Collector Profiles API
+  termsOfService: https://developers.artsy.net/terms
+  contact:
+    name: Artsy API Developers
+    email: artsy-api-developers@googlegroups.com
+    url: https://developers.artsy.net
+  version: v2
+  description: Operations about collector_profiles
+servers:
+- url: https://api.artsy.net
+tags:
+- name: Collector Profiles
+  description: Operations about collector_profiles
+paths:
+  /api/collector_profiles:
+    get:
+      description: Retrieve collector profiles.
+      parameters:
+      - in: query
+        name: owner_id
+        description: Only return the collector profile for a given user or anonymous session.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: offset
+        description: Offset from which to retrieve.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - in: query
+        name: size
+        description: Number of items to retrieve for this page or from the current offset.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: cursor
+        description: Cursor for pagination.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: sample
+        description: If present and collection supports sampling, will redirect to a random single object.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Retrieve collector profiles.
+      tags:
+      - Collector Profiles
+      operationId: getApiCollectorProfiles
+      summary: Get api collector profiles
+      x-summary-source: derived
+  /api/collector_profiles/{id}:
+    get:
+      description: Retrieve a collector profile.
+      parameters:
+      - in: path
+        name: id
+        description: Collector profile id.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Retrieve a collector profile.
+      tags:
+      - Collector Profiles
+      operationId: getApiCollectorProfilesId
+      summary: Get api collector profiles id
+      x-summary-source: derived

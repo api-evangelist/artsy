@@ -1,0 +1,71 @@
+openapi: 3.2.0
+info:
+  title: Artsy Public Profiles API
+  termsOfService: https://developers.artsy.net/terms
+  contact:
+    name: Artsy API Developers
+    email: artsy-api-developers@googlegroups.com
+    url: https://developers.artsy.net
+  version: v2
+  description: Operations about profiles
+servers:
+- url: https://api.artsy.net
+tags:
+- name: Profiles
+  description: Operations about profiles
+paths:
+  /api/profiles:
+    get:
+      description: Retrieve a collection of profiles.
+      parameters:
+      - in: query
+        name: offset
+        description: Offset from which to retrieve.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - in: query
+        name: size
+        description: Number of items to retrieve for this page or from the current offset.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: cursor
+        description: Cursor for pagination.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: sample
+        description: If present and collection supports sampling, will redirect to a random single object.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Retrieve a collection of profiles.
+      tags:
+      - Profiles
+      operationId: getApiProfiles
+      summary: Get api profiles
+      x-summary-source: derived
+  /api/profiles/{id}:
+    get:
+      description: Retrieve a profile by id.
+      parameters:
+      - in: path
+        name: id
+        description: Profile id.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Retrieve a profile by id.
+      tags:
+      - Profiles
+      operationId: getApiProfilesId
+      summary: Get api profiles id
+      x-summary-source: derived

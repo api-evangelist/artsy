@@ -1,0 +1,70 @@
+openapi: 3.2.0
+info:
+  title: Artsy Public Partner Communications API
+  termsOfService: https://developers.artsy.net/terms
+  contact:
+    name: Artsy API Developers
+    email: artsy-api-developers@googlegroups.com
+    url: https://developers.artsy.net
+  version: v2
+  description: Operations about partner_communications
+servers:
+- url: https://api.artsy.net
+tags:
+- name: Partner Communications
+  description: Operations about partner_communications
+paths:
+  /api/partner_communications:
+    get:
+      description: Retrieve a collection of partner communications.
+      parameters:
+      - in: query
+        name: name
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: offset
+        description: Offset from which to retrieve.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - in: query
+        name: size
+        description: Number of items to retrieve for this page or from the current offset.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: cursor
+        description: Cursor for pagination.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Retrieve a collection of partner communications.
+      tags:
+      - Partner Communications
+      operationId: getApiPartnerCommunications
+      summary: Get api partner communications
+      x-summary-source: derived
+  /api/partner_communications/{id}:
+    get:
+      description: Retrieve a partner communication by id.
+      parameters:
+      - in: path
+        name: id
+        description: Partner communication id.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Retrieve a partner communication by id.
+      tags:
+      - Partner Communications
+      operationId: getApiPartnerCommunicationsId
+      summary: Get api partner communications id
+      x-summary-source: derived

@@ -1,0 +1,97 @@
+openapi: 3.2.0
+info:
+  title: Artsy Public Fairs API
+  termsOfService: https://developers.artsy.net/terms
+  contact:
+    name: Artsy API Developers
+    email: artsy-api-developers@googlegroups.com
+    url: https://developers.artsy.net
+  version: v2
+  description: Operations about fairs
+servers:
+- url: https://api.artsy.net
+tags:
+- name: Fairs
+  description: Operations about fairs
+paths:
+  /api/fairs:
+    get:
+      description: Retrieve a collection of fairs.
+      parameters:
+      - in: query
+        name: status
+        required: false
+        schema:
+          type: string
+          enum:
+          - current
+          - running
+          - closed
+          - upcoming
+          - running_and_upcoming
+          - closing_soon
+          - active
+      - in: query
+        name: offset
+        description: Offset from which to retrieve.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - in: query
+        name: size
+        description: Number of items to retrieve for this page or from the current offset.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: cursor
+        description: Cursor for pagination.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: sample
+        description: If present and collection supports sampling, will redirect to a random single object.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: sort
+        description: Sort order.
+        required: false
+        schema:
+          type: string
+          enum:
+          - created_at
+          - -created_at
+          - start_at
+          - -start_at
+          - name
+          - -name
+      responses:
+        '200':
+          description: Retrieve a collection of fairs.
+      tags:
+      - Fairs
+      operationId: getApiFairs
+      summary: Get api fairs
+      x-summary-source: derived
+  /api/fairs/{id}:
+    get:
+      description: Retrieve a fair by id.
+      parameters:
+      - in: path
+        name: id
+        description: Fair id.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Retrieve a fair by id.
+      tags:
+      - Fairs
+      operationId: getApiFairsId
+      summary: Get api fairs id
+      x-summary-source: derived

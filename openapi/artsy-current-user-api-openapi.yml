@@ -1,0 +1,27 @@
+openapi: 3.2.0
+info:
+  title: Artsy Public Current User API
+  termsOfService: https://developers.artsy.net/terms
+  contact:
+    name: Artsy API Developers
+    email: artsy-api-developers@googlegroups.com
+    url: https://developers.artsy.net
+  version: v2
+  description: Operations about current_users
+servers:
+- url: https://api.artsy.net
+tags:
+- name: Current User
+  description: Operations about current_users
+paths:
+  /api/current_user:
+    get:
+      description: Retrieve the current user.
+      responses:
+        '200':
+          description: Retrieve the current user.
+      tags:
+      - Current User
+      operationId: getApiCurrentUser
+      summary: Get api current user
+      x-summary-source: derived

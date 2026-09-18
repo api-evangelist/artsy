@@ -1,0 +1,136 @@
+openapi: 3.2.0
+info:
+  title: Artsy Public Artworks API
+  termsOfService: https://developers.artsy.net/terms
+  contact:
+    name: Artsy API Developers
+    email: artsy-api-developers@googlegroups.com
+    url: https://developers.artsy.net
+  version: v2
+  description: Operations about artworks
+servers:
+- url: https://api.artsy.net
+tags:
+- name: Artworks
+  description: Operations about artworks
+paths:
+  /api/artworks:
+    get:
+      description: Retrieve a collection of artworks.
+      parameters:
+      - in: query
+        name: offset
+        description: Offset from which to retrieve.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - in: query
+        name: size
+        description: Maximum number of items to retrieve.
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 5
+      - in: query
+        name: cursor
+        description: Cursor for pagination.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: sample
+        description: If present and collection supports sampling, will redirect to a random single object.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: term
+        description: Term to match.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: page
+        description: Page to retrieve.
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - in: query
+        name: exact
+        description: Find an exact match.
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - in: query
+        name: artist_id
+        description: Only return artworks by this artist.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: partner_id
+        description: Only return artworks belonging to this partner.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: show_id
+        description: Only return artworks at this show.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: collection_id
+        description: Only return artworks within a collection.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: user_id
+        description: Only return artworks within a collection that belongs to this user.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: similar_to_artwork_id
+        description: Return artworks similar to this artwork.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: published
+        description: Retrieve all published artworks.
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Retrieve a collection of artworks.
+      tags:
+      - Artworks
+      operationId: getApiArtworks
+      summary: Get api artworks
+      x-summary-source: derived
+  /api/artworks/{id}:
+    get:
+      description: Retrieve an artwork by id.
+      parameters:
+      - in: path
+        name: id
+        description: Artwork id.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Retrieve an artwork by id.
+      tags:
+      - Artworks
+      operationId: getApiArtworksId
+      summary: Get api artworks id
+      x-summary-source: derived

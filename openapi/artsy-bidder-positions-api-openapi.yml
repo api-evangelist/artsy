@@ -1,0 +1,34 @@
+openapi: 3.2.0
+info:
+  title: Artsy Public Bidder Positions API
+  termsOfService: https://developers.artsy.net/terms
+  contact:
+    name: Artsy API Developers
+    email: artsy-api-developers@googlegroups.com
+    url: https://developers.artsy.net
+  version: v2
+  description: Operations about bidder_positions
+servers:
+- url: https://api.artsy.net
+tags:
+- name: Bidder Positions
+  description: Operations about bidder_positions
+paths:
+  /api/bidder_positions/{id}:
+    get:
+      description: Retrieve a bidder position.
+      parameters:
+      - in: path
+        name: id
+        description: Position id.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Retrieve a bidder position.
+      tags:
+      - Bidder Positions
+      operationId: getApiBidderPositionsId
+      summary: Get api bidder positions id
+      x-summary-source: derived

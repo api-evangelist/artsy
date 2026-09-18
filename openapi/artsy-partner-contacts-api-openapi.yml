@@ -1,0 +1,89 @@
+openapi: 3.2.0
+info:
+  title: Artsy Public Partner Contacts API
+  termsOfService: https://developers.artsy.net/terms
+  contact:
+    name: Artsy API Developers
+    email: artsy-api-developers@googlegroups.com
+    url: https://developers.artsy.net
+  version: v2
+  description: Operations about partner_contacts
+servers:
+- url: https://api.artsy.net
+tags:
+- name: Partner Contacts
+  description: Operations about partner_contacts
+paths:
+  /api/partner_contacts:
+    get:
+      description: Retrieve a collection of partner contacts by partner_id.
+      parameters:
+      - in: query
+        name: partner_id
+        description: Only return contacts for this partner.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: can_contact
+        description: Only return contacts with given value for can_contact.
+        required: false
+        schema:
+          type: boolean
+      - in: query
+        name: partner_communication_id
+        description: Only return contacts that are subscribed to this partner communication.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: offset
+        description: Offset from which to retrieve.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - in: query
+        name: size
+        description: Number of items to retrieve for this page or from the current offset.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: cursor
+        description: Cursor for pagination.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: sample
+        description: If present and collection supports sampling, will redirect to a random single object.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Retrieve a collection of partner contacts by partner_id.
+      tags:
+      - Partner Contacts
+      operationId: getApiPartnerContacts
+      summary: Get api partner contacts
+      x-summary-source: derived
+  /api/partner_contacts/{id}:
+    get:
+      description: Retrieve a partner contact by id.
+      parameters:
+      - in: path
+        name: id
+        description: Partner contact id.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Retrieve a partner contact by id.
+      tags:
+      - Partner Contacts
+      operationId: getApiPartnerContactsId
+      summary: Get api partner contacts id
+      x-summary-source: derived

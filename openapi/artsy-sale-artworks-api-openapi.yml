@@ -1,0 +1,94 @@
+openapi: 3.2.0
+info:
+  title: Artsy Public Sale Artworks API
+  termsOfService: https://developers.artsy.net/terms
+  contact:
+    name: Artsy API Developers
+    email: artsy-api-developers@googlegroups.com
+    url: https://developers.artsy.net
+  version: v2
+  description: Operations about sale_artworks
+servers:
+- url: https://api.artsy.net
+tags:
+- name: Sale Artworks
+  description: Operations about sale_artworks
+paths:
+  /api/sale_artworks/{id}:
+    get:
+      description: Retrieve a sale_artwork by id.
+      parameters:
+      - in: path
+        name: id
+        description: SaleArtwork id.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Retrieve a sale_artwork by id.
+      tags:
+      - Sale Artworks
+      operationId: getApiSaleArtworksId
+      summary: Get api sale artworks id
+      x-summary-source: derived
+  /api/sale_artworks:
+    get:
+      description: Retrieve sale artworks.
+      parameters:
+      - in: query
+        name: offset
+        description: Offset from which to retrieve.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - in: query
+        name: size
+        description: Number of items to retrieve for this page or from the current offset.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: cursor
+        description: Cursor for pagination.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: sale_id
+        description: Return all sale artworks for a given Sale id.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: published
+        description: Return sale artworks with published artworks.
+        required: false
+        schema:
+          type: boolean
+      - in: query
+        name: artwork_id
+        description: Only return sale artworks for a given artwork_id.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: sort
+        description: Sort order.
+        required: false
+        schema:
+          type: string
+          enum:
+          - position
+          - end_at
+          - -end_at
+          - timely_at
+      responses:
+        '200':
+          description: Retrieve sale artworks.
+      tags:
+      - Sale Artworks
+      operationId: getApiSaleArtworks
+      summary: Get api sale artworks
+      x-summary-source: derived

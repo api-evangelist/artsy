@@ -1,0 +1,89 @@
+openapi: 3.2.0
+info:
+  title: Artsy Public Partners API
+  termsOfService: https://developers.artsy.net/terms
+  contact:
+    name: Artsy API Developers
+    email: artsy-api-developers@googlegroups.com
+    url: https://developers.artsy.net
+  version: v2
+  description: Operations about partners
+servers:
+- url: https://api.artsy.net
+tags:
+- name: Partners
+  description: Operations about partners
+paths:
+  /api/partners:
+    get:
+      description: Retrieve a collection of partners.
+      parameters:
+      - in: query
+        name: user_id
+        description: Return partners that a given user has access to.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: partner_id
+        description: Only return this partner.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: eligible_for_partner_analytics
+        description: Only return partners eligible for partner analytics.
+        required: false
+        schema:
+          type: boolean
+      - in: query
+        name: offset
+        description: Offset from which to retrieve.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - in: query
+        name: size
+        description: Number of items to retrieve for this page or from the current offset.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: cursor
+        description: Cursor for pagination.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: sample
+        description: If present and collection supports sampling, will redirect to a random single object.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Retrieve a collection of partners.
+      tags:
+      - Partners
+      operationId: getApiPartners
+      summary: Get api partners
+      x-summary-source: derived
+  /api/partners/{id}:
+    get:
+      description: Retrieve a partner by id.
+      parameters:
+      - in: path
+        name: id
+        description: Partner id.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Retrieve a partner by id.
+      tags:
+      - Partners
+      operationId: getApiPartnersId
+      summary: Get api partners id
+      x-summary-source: derived

@@ -1,0 +1,94 @@
+openapi: 3.2.0
+info:
+  title: Artsy Public Shows API
+  termsOfService: https://developers.artsy.net/terms
+  contact:
+    name: Artsy API Developers
+    email: artsy-api-developers@googlegroups.com
+    url: https://developers.artsy.net
+  version: v2
+  description: Operations about shows
+servers:
+- url: https://api.artsy.net
+tags:
+- name: Shows
+  description: Operations about shows
+paths:
+  /api/shows:
+    get:
+      description: Retrieve a collection of shows.
+      parameters:
+      - in: query
+        name: status
+        description: Only return shows with this status.
+        required: false
+        schema:
+          type: string
+          enum:
+          - upcoming
+          - running
+          - closed
+          - current
+      - in: query
+        name: partner_id
+        description: Only return shows that belong to this partner.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: fair_id
+        description: Only return shows at this fair.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: offset
+        description: Offset from which to retrieve.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - in: query
+        name: size
+        description: Number of items to retrieve for this page or from the current offset.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: cursor
+        description: Cursor for pagination.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: sample
+        description: If present and collection supports sampling, will redirect to a random single object.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Retrieve a collection of shows.
+      tags:
+      - Shows
+      operationId: getApiShows
+      summary: Get api shows
+      x-summary-source: derived
+  /api/shows/{id}:
+    get:
+      description: Retrieve a show by id.
+      parameters:
+      - in: path
+        name: id
+        description: Show id.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Retrieve a show by id.
+      tags:
+      - Shows
+      operationId: getApiShowsId
+      summary: Get api shows id
+      x-summary-source: derived

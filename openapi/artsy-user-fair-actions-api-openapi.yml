@@ -1,0 +1,97 @@
+openapi: 3.2.0
+info:
+  title: Artsy Public User Fair Actions API
+  termsOfService: https://developers.artsy.net/terms
+  contact:
+    name: Artsy API Developers
+    email: artsy-api-developers@googlegroups.com
+    url: https://developers.artsy.net
+  version: v2
+  description: Operations about user_fair_actions
+servers:
+- url: https://api.artsy.net
+tags:
+- name: User Fair Actions
+  description: Operations about user_fair_actions
+paths:
+  /api/user_fair_actions:
+    get:
+      description: Retrieve user fair actions.
+      parameters:
+      - in: query
+        name: owner_type
+        required: false
+        schema:
+          type: string
+          enum:
+          - UserSaleProfile
+          - CollectorProfile
+      - in: query
+        name: owner_id
+        description: ID of owner
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: user_id
+        description: User id.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: fair_id
+        description: Fair id.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: offset
+        description: Offset from which to retrieve.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - in: query
+        name: size
+        description: Number of items to retrieve for this page or from the current offset.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: cursor
+        description: Cursor for pagination.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: sample
+        description: If present and collection supports sampling, will redirect to a random single object.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Retrieve user fair actions.
+      tags:
+      - User Fair Actions
+      operationId: getApiUserFairActions
+      summary: Get api user fair actions
+      x-summary-source: derived
+  /api/user_fair_actions/{id}:
+    get:
+      description: Retrieve a user fair action.
+      parameters:
+      - in: path
+        name: id
+        description: User fair action id.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Retrieve a user fair action.
+      tags:
+      - User Fair Actions
+      operationId: getApiUserFairActionsId
+      summary: Get api user fair actions id
+      x-summary-source: derived

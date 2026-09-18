@@ -1,0 +1,34 @@
+openapi: 3.2.0
+info:
+  title: Artsy Public User Details API
+  termsOfService: https://developers.artsy.net/terms
+  contact:
+    name: Artsy API Developers
+    email: artsy-api-developers@googlegroups.com
+    url: https://developers.artsy.net
+  version: v2
+  description: Operations about user_details
+servers:
+- url: https://api.artsy.net
+tags:
+- name: User Details
+  description: Operations about user_details
+paths:
+  /api/user_details/{id}:
+    get:
+      description: Retrieve user details by user id.
+      parameters:
+      - in: path
+        name: id
+        description: User id.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Retrieve user details by user id.
+      tags:
+      - User Details
+      operationId: getApiUserDetailsId
+      summary: Get api user details id
+      x-summary-source: derived

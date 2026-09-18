@@ -1,0 +1,96 @@
+openapi: 3.2.0
+info:
+  title: Artsy Public Devices API
+  termsOfService: https://developers.artsy.net/terms
+  contact:
+    name: Artsy API Developers
+    email: artsy-api-developers@googlegroups.com
+    url: https://developers.artsy.net
+  version: v2
+  description: Operations about devices
+servers:
+- url: https://api.artsy.net
+tags:
+- name: Devices
+  description: Operations about devices
+paths:
+  /api/devices:
+    get:
+      description: Retrieve devices.
+      parameters:
+      - in: query
+        name: offset
+        description: Offset from which to retrieve.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - in: query
+        name: size
+        description: Number of items to retrieve for this page or from the current offset.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: cursor
+        description: Cursor for pagination.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: user_id
+        description: User id.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: app_id
+        description: Filter to devices matching specified app_ids
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: Retrieve devices.
+      tags:
+      - Devices
+      operationId: getApiDevices
+      summary: Get api devices
+      x-summary-source: derived
+  /api/devices/{id}:
+    get:
+      description: Retrieve individual device.
+      parameters:
+      - in: path
+        name: id
+        description: Device id.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Retrieve individual device.
+      tags:
+      - Devices
+      operationId: getApiDevicesId
+      summary: Get api devices id
+      x-summary-source: derived
+    delete:
+      description: Delete individual device.
+      parameters:
+      - in: path
+        name: id
+        description: Device id.
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Delete individual device.
+      tags:
+      - Devices
+      operationId: deleteApiDevicesId
+      summary: Delete api devices id
+      x-summary-source: derived

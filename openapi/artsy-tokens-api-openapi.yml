@@ -1,0 +1,77 @@
+openapi: 3.2.0
+info:
+  title: Artsy Public Tokens API
+  termsOfService: https://developers.artsy.net/terms
+  contact:
+    name: Artsy API Developers
+    email: artsy-api-developers@googlegroups.com
+    url: https://developers.artsy.net
+  version: v2
+  description: Operations about tokens
+servers:
+- url: https://api.artsy.net
+tags:
+- name: Tokens
+  description: Operations about tokens
+paths:
+  /api/tokens:
+    get:
+      description: Retrieve tokens supported by this API.
+      responses:
+        '200':
+          description: Retrieve tokens supported by this API.
+      tags:
+      - Tokens
+      operationId: getApiTokens
+      summary: Get api tokens
+      x-summary-source: derived
+  /api/tokens/xapp_token:
+    post:
+      description: Create a new XAPP access token.
+      responses:
+        '201':
+          description: Create a new XAPP access token.
+      tags:
+      - Tokens
+      operationId: postApiTokensXappToken
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postApiTokensXappToken'
+        required: true
+      summary: Post api tokens xapp token
+      x-summary-source: derived
+  /api/tokens/access_token:
+    delete:
+      description: Expire an OAuth access token.
+      parameters:
+      - in: query
+        name: access_token
+        description: Access token, defaults to the value in the X-Access-Token header.
+        required: false
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Expire an OAuth access token.
+      tags:
+      - Tokens
+      operationId: deleteApiTokensAccessToken
+      summary: Delete api tokens access token
+      x-summary-source: derived
+components:
+  schemas:
+    postApiTokensXappToken:
+      type: object
+      properties:
+        client_id:
+          type: string
+          description: Client id.
+        client_secret:
+          type: string
+          description: Client secret.
+      required:
+      - client_id
+      - client_secret
+      description: Create a new XAPP access token.

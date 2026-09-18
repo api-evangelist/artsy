@@ -1,0 +1,108 @@
+openapi: 3.2.0
+info:
+  title: Artsy Public Sales API
+  termsOfService: https://developers.artsy.net/terms
+  contact:
+    name: Artsy API Developers
+    email: artsy-api-developers@googlegroups.com
+    url: https://developers.artsy.net
+  version: v2
+  description: Operations about sales
+servers:
+- url: https://api.artsy.net
+tags:
+- name: Sales
+  description: Operations about sales
+paths:
+  /api/sales/{id}:
+    get:
+      description: Retrieve a sale by id.
+      parameters:
+      - in: path
+        name: id
+        description: Sale id.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Retrieve a sale by id.
+      tags:
+      - Sales
+      operationId: getApiSalesId
+      summary: Get api sales id
+      x-summary-source: derived
+  /api/sales:
+    get:
+      description: Retrieve sales.
+      parameters:
+      - in: query
+        name: offset
+        description: Offset from which to retrieve.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - in: query
+        name: size
+        description: Number of items to retrieve for this page or from the current offset.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: cursor
+        description: Cursor for pagination.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: live
+        description: Only return sales that are ongoing.
+        required: false
+        schema:
+          type: boolean
+      - in: query
+        name: is_auction
+        description: Only return auctions or non-auction sales.
+        required: false
+        schema:
+          type: boolean
+      - in: query
+        name: published
+        description: Only return sales that are published.
+        required: false
+        schema:
+          type: boolean
+      - in: query
+        name: sort
+        description: Sort order.
+        required: false
+        schema:
+          type: string
+          enum:
+          - id
+          - -id
+          - name
+          - -name
+          - created_at
+          - -created_at
+          - start_at
+          - -start_at
+          - end_at
+          - -end_at
+          - eligible_sale_artworks_count
+          - -eligible_sale_artworks_count
+          - timely_at
+          - -timely_at
+          - timely_at,name
+          - -timely_at,name
+          - is_artsy_licensed,timely_at,name
+          - -is_artsy_licensed,timely_at,name
+      responses:
+        '200':
+          description: Retrieve sales.
+      tags:
+      - Sales
+      operationId: getApiSales
+      summary: Get api sales
+      x-summary-source: derived

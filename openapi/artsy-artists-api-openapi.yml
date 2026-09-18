@@ -1,0 +1,159 @@
+openapi: 3.2.0
+info:
+  title: Artsy Public Artists API
+  termsOfService: https://developers.artsy.net/terms
+  contact:
+    name: Artsy API Developers
+    email: artsy-api-developers@googlegroups.com
+    url: https://developers.artsy.net
+  version: v2
+  description: Operations about artists
+servers:
+- url: https://api.artsy.net
+tags:
+- name: Artists
+  description: Operations about artists
+paths:
+  /api/artists:
+    get:
+      description: Retrieve a collection of artists.
+      parameters:
+      - in: query
+        name: artwork_id
+        description: Return artists for a given artwork.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: sale_id
+        description: Return artists appearing in a given sale
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: similar_to_artist_id
+        description: Return artists similar to a given artist.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: similarity_type
+        description: Similarity type.
+        required: false
+        schema:
+          type: string
+          enum:
+          - default
+          - contemporary
+      - in: query
+        name: gene_id
+        description: Return a set of artists that represent a given gene.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: artworks
+        description: Only return artists with artworks.
+        required: false
+        schema:
+          type: boolean
+      - in: query
+        name: published_artworks
+        description: Only return artists with published artworks.
+        required: false
+        schema:
+          type: boolean
+      - in: query
+        name: partner_id
+        description: Return artists with artworks that belong to the partner.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: sort
+        description: Sort order.
+        required: false
+        schema:
+          type: string
+          enum:
+          - _slugs
+          - -_slugs
+          - created_at
+          - -created_at
+          - sortable_id
+          - -sortable_id
+          - -trending
+      - in: query
+        name: offset
+        description: Offset from which to retrieve.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - in: query
+        name: size
+        description: Maximum number of items to retrieve.
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 5
+      - in: query
+        name: cursor
+        description: Cursor for pagination.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: sample
+        description: If present and collection supports sampling, will redirect to a random single object.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: term
+        description: Term to match.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: page
+        description: Page to retrieve.
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - in: query
+        name: exact
+        description: Find an exact match.
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: Retrieve a collection of artists.
+      tags:
+      - Artists
+      operationId: getApiArtists
+      summary: Get api artists
+      x-summary-source: derived
+  /api/artists/{id}:
+    get:
+      description: Retrieve an artist by id.
+      parameters:
+      - in: path
+        name: id
+        description: Artist id.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Retrieve an artist by id.
+      tags:
+      - Artists
+      operationId: getApiArtistsId
+      summary: Get api artists id
+      x-summary-source: derived

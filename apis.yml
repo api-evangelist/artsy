@@ -99,6 +99,8 @@ apis:
   humanURL: https://developers.artsy.net/
   baseURL: https://api.artsy.net/api
   tags:
+  - Application
+  tags_raw:
   - applications
   properties:
   - type: OpenAPI
@@ -121,6 +123,8 @@ apis:
   humanURL: https://developers.artsy.net/
   baseURL: https://api.artsy.net/api
   tags:
+  - Artists
+  tags_raw:
   - artists
   properties:
   - type: OpenAPI
@@ -143,6 +147,8 @@ apis:
   humanURL: https://developers.artsy.net/
   baseURL: https://api.artsy.net/api
   tags:
+  - Artworks
+  tags_raw:
   - artworks
   properties:
   - type: OpenAPI
@@ -165,6 +171,8 @@ apis:
   humanURL: https://developers.artsy.net/
   baseURL: https://api.artsy.net/api
   tags:
+  - Bidder Positions
+  tags_raw:
   - bidder_positions
   properties:
   - type: OpenAPI
@@ -187,6 +195,8 @@ apis:
   humanURL: https://developers.artsy.net/
   baseURL: https://api.artsy.net/api
   tags:
+  - Bidders
+  tags_raw:
   - bidders
   properties:
   - type: OpenAPI
@@ -209,6 +219,8 @@ apis:
   humanURL: https://developers.artsy.net/
   baseURL: https://api.artsy.net/api
   tags:
+  - Collection Items
+  tags_raw:
   - collection_items
   properties:
   - type: OpenAPI
@@ -231,6 +243,8 @@ apis:
   humanURL: https://developers.artsy.net/
   baseURL: https://api.artsy.net/api
   tags:
+  - Collector Profiles
+  tags_raw:
   - collector_profiles
   properties:
   - type: OpenAPI
@@ -253,6 +267,8 @@ apis:
   humanURL: https://developers.artsy.net/
   baseURL: https://api.artsy.net/api
   tags:
+  - Current User
+  tags_raw:
   - current_user
   properties:
   - type: OpenAPI
@@ -275,6 +291,8 @@ apis:
   humanURL: https://developers.artsy.net/
   baseURL: https://api.artsy.net/api
   tags:
+  - Devices
+  tags_raw:
   - devices
   properties:
   - type: OpenAPI
@@ -297,6 +315,8 @@ apis:
   humanURL: https://developers.artsy.net/
   baseURL: https://api.artsy.net/api
   tags:
+  - Editions
+  tags_raw:
   - editions
   properties:
   - type: OpenAPI
@@ -319,6 +339,8 @@ apis:
   humanURL: https://developers.artsy.net/
   baseURL: https://api.artsy.net/api
   tags:
+  - Fairs
+  tags_raw:
   - fairs
   properties:
   - type: OpenAPI
@@ -341,6 +363,8 @@ apis:
   humanURL: https://developers.artsy.net/
   baseURL: https://api.artsy.net/api
   tags:
+  - Genes
+  tags_raw:
   - genes
   properties:
   - type: OpenAPI
@@ -363,6 +387,8 @@ apis:
   humanURL: https://developers.artsy.net/
   baseURL: https://api.artsy.net/api
   tags:
+  - Image
+  tags_raw:
   - images
   properties:
   - type: OpenAPI
@@ -384,7 +410,8 @@ apis:
   description: Operations about lot_standings
   humanURL: https://developers.artsy.net/
   baseURL: https://api.artsy.net/api
-  tags:
+  tags: []
+  tags_raw:
   - lot_standings
   properties:
   - type: OpenAPI
@@ -407,6 +434,8 @@ apis:
   humanURL: https://developers.artsy.net/
   baseURL: https://api.artsy.net/api
   tags:
+  - Partner Communications
+  tags_raw:
   - partner_communications
   properties:
   - type: OpenAPI
@@ -429,6 +458,8 @@ apis:
   humanURL: https://developers.artsy.net/
   baseURL: https://api.artsy.net/api
   tags:
+  - Partner Contacts
+  tags_raw:
   - partner_contacts
   properties:
   - type: OpenAPI
@@ -451,6 +482,8 @@ apis:
   humanURL: https://developers.artsy.net/
   baseURL: https://api.artsy.net/api
   tags:
+  - Partners
+  tags_raw:
   - partners
   properties:
   - type: OpenAPI
@@ -473,6 +506,8 @@ apis:
   humanURL: https://developers.artsy.net/
   baseURL: https://api.artsy.net/api
   tags:
+  - Profiles
+  tags_raw:
   - profiles
   properties:
   - type: OpenAPI
@@ -495,6 +530,8 @@ apis:
   humanURL: https://developers.artsy.net/
   baseURL: https://api.artsy.net/api
   tags:
+  - Sale Artworks
+  tags_raw:
   - sale_artworks
   properties:
   - type: OpenAPI
@@ -517,6 +554,8 @@ apis:
   humanURL: https://developers.artsy.net/
   baseURL: https://api.artsy.net/api
   tags:
+  - Sales
+  tags_raw:
   - sales
   properties:
   - type: OpenAPI
@@ -539,6 +578,8 @@ apis:
   humanURL: https://developers.artsy.net/
   baseURL: https://api.artsy.net/api
   tags:
+  - Search
+  tags_raw:
   - search
   properties:
   - type: OpenAPI
@@ -561,6 +602,8 @@ apis:
   humanURL: https://developers.artsy.net/
   baseURL: https://api.artsy.net/api
   tags:
+  - Shows
+  tags_raw:
   - shows
   properties:
   - type: OpenAPI
@@ -583,6 +626,8 @@ apis:
   humanURL: https://developers.artsy.net/
   baseURL: https://api.artsy.net/api
   tags:
+  - Status
+  tags_raw:
   - status
   properties:
   - type: OpenAPI
@@ -605,6 +650,8 @@ apis:
   humanURL: https://developers.artsy.net/
   baseURL: https://api.artsy.net/api
   tags:
+  - Tokens
+  tags_raw:
   - tokens
   properties:
   - type: OpenAPI
@@ -627,6 +674,8 @@ apis:
   humanURL: https://developers.artsy.net/
   baseURL: https://api.artsy.net/api
   tags:
+  - User Details
+  tags_raw:
   - user_details
   properties:
   - type: OpenAPI
@@ -649,6 +698,8 @@ apis:
   humanURL: https://developers.artsy.net/
   baseURL: https://api.artsy.net/api
   tags:
+  - User Fair Actions
+  tags_raw:
   - user_fair_actions
   properties:
   - type: OpenAPI
@@ -671,6 +722,8 @@ apis:
   humanURL: https://developers.artsy.net/
   baseURL: https://api.artsy.net/api
   tags:
+  - User
+  tags_raw:
   - users
   properties:
   - type: OpenAPI

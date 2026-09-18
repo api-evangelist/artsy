@@ -1,0 +1,27 @@
+openapi: 3.2.0
+info:
+  title: Artsy Public Status API
+  termsOfService: https://developers.artsy.net/terms
+  contact:
+    name: Artsy API Developers
+    email: artsy-api-developers@googlegroups.com
+    url: https://developers.artsy.net
+  version: v2
+  description: Operations about statuses
+servers:
+- url: https://api.artsy.net
+tags:
+- name: Status
+  description: Operations about statuses
+paths:
+  /api/status:
+    get:
+      description: Return API status.
+      responses:
+        '200':
+          description: Return API status.
+      tags:
+      - Status
+      operationId: getApiStatus
+      summary: Get api status
+      x-summary-source: derived

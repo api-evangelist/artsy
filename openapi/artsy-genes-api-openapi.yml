@@ -1,0 +1,83 @@
+openapi: 3.2.0
+info:
+  title: Artsy Public Genes API
+  termsOfService: https://developers.artsy.net/terms
+  contact:
+    name: Artsy API Developers
+    email: artsy-api-developers@googlegroups.com
+    url: https://developers.artsy.net
+  version: v2
+  description: Operations about genes
+servers:
+- url: https://api.artsy.net
+tags:
+- name: Genes
+  description: Operations about genes
+paths:
+  /api/genes:
+    get:
+      description: Retrieve genes.
+      parameters:
+      - in: query
+        name: artist_id
+        description: Return genes of a given artist.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: artwork_id
+        description: Return genes of a given artwork.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: offset
+        description: Offset from which to retrieve.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - in: query
+        name: size
+        description: Number of items to retrieve for this page or from the current offset.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: cursor
+        description: Cursor for pagination.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: sample
+        description: If present and collection supports sampling, will redirect to a random single object.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Retrieve genes.
+      tags:
+      - Genes
+      operationId: getApiGenes
+      summary: Get api genes
+      x-summary-source: derived
+  /api/genes/{id}:
+    get:
+      description: Retrieve a gene by id.
+      parameters:
+      - in: path
+        name: id
+        description: Gene id.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Retrieve a gene by id.
+      tags:
+      - Genes
+      operationId: getApiGenesId
+      summary: Get api genes id
+      x-summary-source: derived

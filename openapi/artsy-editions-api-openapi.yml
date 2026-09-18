@@ -1,0 +1,84 @@
+openapi: 3.2.0
+info:
+  title: Artsy Public Editions API
+  termsOfService: https://developers.artsy.net/terms
+  contact:
+    name: Artsy API Developers
+    email: artsy-api-developers@googlegroups.com
+    url: https://developers.artsy.net
+  version: v2
+  description: Operations about editions
+servers:
+- url: https://api.artsy.net
+tags:
+- name: Editions
+  description: Operations about editions
+paths:
+  /api/editions:
+    get:
+      description: Retrieve a collection of edition sets.
+      parameters:
+      - in: query
+        name: offset
+        description: Offset from which to retrieve.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - in: query
+        name: size
+        description: Number of items to retrieve for this page or from the current offset.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: cursor
+        description: Cursor for pagination.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: artwork_id
+        description: Artwork id.
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: public
+        description: Only return editions of artworks publicly available via the API.
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: Retrieve a collection of edition sets.
+      tags:
+      - Editions
+      operationId: getApiEditions
+      summary: Get api editions
+      x-summary-source: derived
+  /api/editions/{id}:
+    get:
+      description: Retrieve an edition set for an artwork by id.
+      parameters:
+      - in: path
+        name: id
+        description: Edition set id.
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: artwork_id
+        description: Artwork id.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Retrieve an edition set for an artwork by id.
+      tags:
+      - Editions
+      operationId: getApiEditionsId
+      summary: Get api editions id
+      x-summary-source: derived

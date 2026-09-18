@@ -1,0 +1,94 @@
+openapi: 3.2.0
+info:
+  title: Artsy Public Users API
+  termsOfService: https://developers.artsy.net/terms
+  contact:
+    name: Artsy API Developers
+    email: artsy-api-developers@googlegroups.com
+    url: https://developers.artsy.net
+  version: v2
+  description: Operations about users
+servers:
+- url: https://api.artsy.net
+tags:
+- name: Users
+  description: Operations about users
+paths:
+  /api/users/{id}:
+    get:
+      description: Retrieve a user by id.
+      parameters:
+      - in: path
+        name: id
+        description: User id.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Retrieve a user by id.
+      tags:
+      - Users
+      operationId: getApiUsersId
+      summary: Get api users id
+      x-summary-source: derived
+  /api/users:
+    get:
+      description: Retrieve a collection of users.
+      parameters:
+      - in: query
+        name: offset
+        description: Offset from which to retrieve.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - in: query
+        name: size
+        description: Maximum number of items to retrieve.
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 5
+      - in: query
+        name: cursor
+        description: Cursor for pagination.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: sample
+        description: If present and collection supports sampling, will redirect to a random single object.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: term
+        description: Term to match.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: page
+        description: Page to retrieve.
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - in: query
+        name: exact
+        description: Find an exact match.
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: Retrieve a collection of users.
+      tags:
+      - Users
+      operationId: getApiUsers
+      summary: Get api users
+      x-summary-source: derived

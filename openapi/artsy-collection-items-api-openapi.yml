@@ -1,0 +1,95 @@
+openapi: 3.2.0
+info:
+  title: Artsy Public Collection Items API
+  termsOfService: https://developers.artsy.net/terms
+  contact:
+    name: Artsy API Developers
+    email: artsy-api-developers@googlegroups.com
+    url: https://developers.artsy.net
+  version: v2
+  description: Operations about collection_items
+servers:
+- url: https://api.artsy.net
+tags:
+- name: Collection Items
+  description: Operations about collection_items
+paths:
+  /api/collection_items/{id}:
+    get:
+      description: Retrieve a collection item by id.
+      parameters:
+      - in: path
+        name: id
+        description: Collection item id.
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: collection_id
+        description: Collection id.
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: user_id
+        description: User id.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Retrieve a collection item by id.
+      tags:
+      - Collection Items
+      operationId: getApiCollectionItemsId
+      summary: Get api collection items id
+      x-summary-source: derived
+  /api/collection_items:
+    get:
+      description: Retrieve collection items.
+      parameters:
+      - in: query
+        name: offset
+        description: Offset from which to retrieve.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - in: query
+        name: size
+        description: Number of items to retrieve for this page or from the current offset.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: cursor
+        description: Cursor for pagination.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: collection_id
+        description: Collection id. (used with user_id)
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: user_id
+        description: User id.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: artwork_id
+        description: Artwork id.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Retrieve collection items.
+      tags:
+      - Collection Items
+      operationId: getApiCollectionItems
+      summary: Get api collection items
+      x-summary-source: derived
